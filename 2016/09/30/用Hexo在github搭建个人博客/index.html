@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="John Doe">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="用Hexo在github搭建个人博客"/>
+  
+  <!--Open Graph Description-->
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Hexo"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>用Hexo在github搭建个人博客 - Hexo</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="Hexo" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            用Hexo在github搭建个人博客
+            
+          </h1>
+          <p class="posted-on">
+          2016-09-30
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/前端/" rel="tag">
+                  前端
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>首先什么是Hexo？Hexo就是一个用Nodejs写的一个框架，这个框架是专门用来搭建博客的。注意是专门用来搭建“博客”的，而不是专门用来搭建“网站”的，博客不就是网站吗？是的，但是说博客是网站的一个重要的分支，Hexo是专门用来搭建博客的，就能暗示出，它有便捷的方式来进行文章的编辑和发布的功能。</p>
+<p>Hexo可以把一个博客从无到有的建立起来，也能在本地编辑之后，能更简便的发布到网上，而不用像想象中的修改Web的Dom树。</p>
+<p>其实搭建一个网站是大体上要分两步的。第一步，域名部分，首先要去买个域名，我的是在阿里云上买的，买了域名，就需要DNS解析，域名是干什么的，是为了让人更好记住的，域名是服务器ip的名字。有域名就需要有服务器，这里的服务器可以指定到github统一的服务器上，当然我们也可以自己买一个服务器，来进行更复杂的网页交互。</p>
+<p>Hexo上搭建的是一个静态博客，更多的是为展示用的。同时Hexo支持MarkDown语法，和多种主题。夫复何求？</p>
+<h3 id="搭建Hexo框架"><a href="#搭建Hexo框架" class="headerlink" title="搭建Hexo框架"></a>搭建Hexo框架</h3><ul>
+<li>有node环境<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">node -v</span><br></pre></td></tr></table></figure></li>
+<li>下载Hexo（Mac电脑）<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo npm install hexo-cli -g</span><br></pre></td></tr></table></figure></li>
+<li>创建本地文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo init manuones.github.io</span><br><span class="line">cd manuones.github.io</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure></li>
+<li>生成静态页面<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo generate  &#x2F;&#x2F;generate可以用g做简写</span><br></pre></td></tr></table></figure></li>
+<li>启动服务，本机作为服务器<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo server  &#x2F;&#x2F;server可以用s做简写</span><br></pre></td></tr></table></figure>
+<img src="http://upload-images.jianshu.io/upload_images/3072403-fd3a6a8e1f6fcb6d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>启动成功，就可以去localhost:4000查看了。</li>
+</ul>
+<h3 id="部署到GitHub上"><a href="#部署到GitHub上" class="headerlink" title="部署到GitHub上"></a>部署到GitHub上</h3><p>按说这时候本地其实已经是一个简单的博客了，可以先尝试着把它部署上去，初学者容易犯的错误就是把整个本地的代码都直接git push到GitHub上，不能这样。</p>
+<p>首先在GitHub上建一个repository，这个repository的名字必须是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;GitHub账号名&gt;.github.io</span><br></pre></td></tr></table></figure>
+<p>我们部署到GitHub上，并不是用的git命令，而是用的Hexo中的deploy部署命令。需要在配置文件中去配置一下，打开本地文件根目录的_config.yml文件。拉到最后，会看到这里，然后根据你的项目，更换一下repo。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3072403-30eca7adac05c61f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>配置好了以后保存，用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d &#x2F;d为deploy的缩写</span><br></pre></td></tr></table></figure>
+<p>这个命令就可以部署到GitHub上的相应的项目中去了，但这时候如果去访问我们的页面，发现还是404报错，找不到页面。这时我们回到GitHub上的项目的根目录，添加一个CNAME文件，注意的是，这个文件不是txt格式，不要加格式，然后在这个文件中，写入你的域名，然后保存，这时再去访问你的域名，就有部署上去的博客了。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3072403-288104787459fdff.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<h3 id="新建文章"><a href="#新建文章" class="headerlink" title="新建文章"></a>新建文章</h3><p>网站上有内容了，基本上就已经有了很大的成就感了，也放心了很多，接下来就是如何丰富这个网站了。我们搭建的是博客，当然要写文章了，接下来就是用Hexo写文章，并部署到线上。</p>
+<ul>
+<li>新建文章名为“测试”的文章。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new 测试</span><br></pre></td></tr></table></figure>
+在这个目录<code>source/_posts</code>，就会看到刚刚新建的文章，<code>测试.md</code>。md是markdown的格式。</li>
+<li>写文章<br>打开md文件<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vim 测试.md</span><br></pre></td></tr></table></figure>
+打开后，如图<br><img src="http://upload-images.jianshu.io/upload_images/3072403-8874978bd1e86725.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>title自然是文章题目，data是文章的写作日期，这个可以更改，tags是标签，这个标签可以用于文章的归类。<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tags:</span><br><span class="line">     - 测试</span><br><span class="line">     - 计算机</span><br></pre></td></tr></table></figure>
+注意“-”之后要空一格。<br>标签怎么用？如图</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/3072403-1abb29776c3acffe.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>点击标签后</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3072403-f921217da087f2b2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""><br>第五行隔开，第六行就是正文了，就可以用MarkDown语法写文章了。写完后，保存。在本地查看效果</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo clean</span><br><span class="line">hexo g</span><br><span class="line">hexo s</span><br></pre></td></tr></table></figure>
+<p>本地没问题就可以部署上去了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo d</span><br></pre></td></tr></table></figure>
+<h3 id="选择主题"><a href="#选择主题" class="headerlink" title="选择主题"></a>选择主题</h3><p>Hexo提供很多博客网站的主题，可以到这个<a href="https://hexo.io/themes/" target="_blank" rel="noopener">网站</a>去查看。比如说我的网站的主题点进去后是这个<a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank" rel="noopener">Daily主题</a>，其中就有教你使用的方法，比如到项目的根目录去进行，一定要在项目的根目录。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git clone https:&#x2F;&#x2F;github.com&#x2F;GallenHu&#x2F;hexo-theme-Daily.git themes&#x2F;Daily</span><br><span class="line">npm install --save hexo-renderer-sass</span><br></pre></td></tr></table></figure>
+<p>这时查看<code>themes/</code>目录下就多了个Daily主题。<br>然后在项目的根目录的<code>_config.yml</code>中theme更改为Daily。<br>同时在<code>themes/Daily</code>中也有一个<code>_config.yml</code>文件，这个文件是用来负责这个主题中的一些配置的。</p>
+<h3 id="其他功能与扩展。"><a href="#其他功能与扩展。" class="headerlink" title="其他功能与扩展。"></a>其他功能与扩展。</h3><p>为博客增加其他功能，比如说增加评论功能啊，增加页面访问统计啊，添加百度站内搜索，添加404公益页面等等，这个功能的添加并不是很难，可以参考<a href="https://linghucong.js.org/2016/04/15/2016-04-15-hexo-github-pages-blog/" target="_blank" rel="noopener">手把手教你使用Hexo + Github Pages搭建个人独立博客</a></p>
+<p>而我常用的就是，在首页增加预览图，只需要增添两行就可以了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">photos:</span><br><span class="line"> - http:&#x2F;&#x2F;i.imgur.com&#x2F;0dZAI8y.jpg</span><br></pre></td></tr></table></figure>
+<p>参考文章：<br><a href="https://github.com/limedroid/HexoLearning" target="_blank" rel="noopener">最好入门：Hexo 博客搭建指南</a><br><a href="https://linghucong.js.org/2016/04/15/2016-04-15-hexo-github-pages-blog/" target="_blank" rel="noopener">手把手教你使用Hexo + Github Pages搭建个人独立博客</a><br><a href="http://www.jianshu.com/p/a2fe56d11c4f" target="_blank" rel="noopener">搭建Hexo博客中碰到的坑</a></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2020/01/17/hello-world/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          <ul><li><a href="https://github.com/GallenHu/hexo-theme-Daily/wiki" target="_blank" rel="noopener">如何自定义这里的内容(配置教程)?</a></li></ul>
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Hexo &copy; 2020</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>
