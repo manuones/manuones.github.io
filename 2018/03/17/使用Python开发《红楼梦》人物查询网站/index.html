@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="John Doe">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="使用Python开发《红楼梦》人物查询网站"/>
+  
+  <!--Open Graph Description-->
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Hexo"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>使用Python开发《红楼梦》人物查询网站 - Hexo</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="Hexo" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            使用Python开发《红楼梦》人物查询网站
+            
+          </h1>
+          <p class="posted-on">
+          2018-03-17
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/Python/" rel="tag">
+                  Python
+                </a>
+              
+                <a href="/tags/后端/" rel="tag">
+                  后端
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>在我阅读《红楼梦》的时候，遇到的一个重大的阅读障碍就是要去认识《红楼梦》中大量的人物，而《红楼梦》中大概出现过多少人物呢？大概出现了有400多位，当然，这四百多位不必全部认识，一百多位认识了也不错，但是这一百多位的人名对我一个亲戚盲来说记住就很不容易。而且不只是人名，人物之间的关系也要有了解。看完《红楼梦》我就有了一个想法，不如做个查询《红楼梦》中人物关系的查询的APP或者是网站。最终做出来的效果<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E4%BD%BF%E7%94%A8Python%E5%BC%80%E5%8F%91%E3%80%8A%E7%BA%A2%E6%A5%BC%E6%A2%A6%E3%80%8B%E4%BA%BA%E7%89%A9%E6%9F%A5%E8%AF%A2%E7%BD%91%E7%AB%991.png" alt="人物关系查询"></p>
+<p>这个想法已经产生了一段时间了，终于在周末闲的蛋疼，花一天时间给实现了。其实也是因为很多条件已经具备了，比如Django框架已经可以较为熟练的运用了，还有有属于自己的服务器了，还有就是docker的部署也会用了。条件都具备了，剩下的事情就顺其自然了。</p>
+<h4 id="第一步要做的就是找出《红楼梦》中出现的人物。"><a href="#第一步要做的就是找出《红楼梦》中出现的人物。" class="headerlink" title="第一步要做的就是找出《红楼梦》中出现的人物。"></a>第一步要做的就是找出《红楼梦》中出现的人物。</h4><p>这个参考的是维基百科上的内容，本来我开始打算把这些人物一一复制到我的Django中自带的sqlite数据库中，但是复制了几个，就发现很麻烦。后来打开开发者工具查看网页，发现内容基本上在td标签中，想到之前做的一个爬虫项目，结构有些类似，应该把代码拿过来改改就能用。于是，</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">import urllib2</span><br><span class="line">import BeautifulSoup</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line">User_Agent &#x3D; &#39;Mozilla&#x2F;5.0 (Windows NT 6.3; WOW64; rv:43.0) Gecko&#x2F;20100101 Firefox&#x2F;43.0&#39;</span><br><span class="line">header &#x3D; &#123;&#125;</span><br><span class="line">header[&#39;User-Agent&#39;] &#x3D; User_Agent</span><br><span class="line"></span><br><span class="line">url &#x3D; &#39;https:&#x2F;&#x2F;zh.wikipedia.org&#x2F;wiki&#x2F;%E7%BA%A2%E6%A5%BC%E6%A2%A6%E4%BA%BA%E7%89%A9%E5%88%97%E8%A1%A8&#39;</span><br><span class="line">req &#x3D; urllib2.Request(url,headers&#x3D;header)</span><br><span class="line">res &#x3D; urllib2.urlopen(req).read()</span><br><span class="line"></span><br><span class="line">soup &#x3D; BeautifulSoup.BeautifulSoup(res)</span><br><span class="line">ips &#x3D; soup.findAll(&#39;tr&#39;)</span><br><span class="line"># f &#x3D; open(&quot;test.txt&quot;,&quot;w&quot;)</span><br><span class="line">f &#x3D; open(&quot;red.txt&quot;,&quot;w&quot;)</span><br><span class="line">for x in range(1,len(ips)):</span><br><span class="line">    ip &#x3D; ips[x]</span><br><span class="line">    tds &#x3D; ip.findAll(&quot;td&quot;)</span><br><span class="line">    # ip_temp &#x3D; tds[1].contents[0]+&quot;\t&quot;+tds[2].contents[0]+&quot;\n&quot;</span><br><span class="line">    #</span><br><span class="line">    if tds!&#x3D;[]:</span><br><span class="line">        try:</span><br><span class="line">            b &#x3D; str(tds[0])</span><br><span class="line">            match &#x3D; re.search(&#39;&quot;&gt;(.*?)&lt;&#x2F;a&gt;&#39;, b)</span><br><span class="line">            c&#x3D;str(match.group(1))</span><br><span class="line">            d&#x3D;str(tds[1])</span><br><span class="line">            #去除html标签</span><br><span class="line">            p &#x3D; re.compile(&#39;&lt;[^&gt;]+&gt;&#39;)</span><br><span class="line">            e&#x3D; p.sub(&quot;&quot;, d)</span><br><span class="line">            total&#x3D;c+&quot;\t&quot;+e+&quot;\n&quot;</span><br><span class="line">            f.write(total)</span><br><span class="line"></span><br><span class="line">        except:</span><br><span class="line">            a &#x3D; str(tds[0])</span><br><span class="line">            match &#x3D; re.search(&#39;&gt;(.*?)&lt;&#x2F;td&gt;&#39;, a)</span><br><span class="line">            c &#x3D; str(match.group(1))</span><br><span class="line">            d &#x3D; str(tds[1])</span><br><span class="line">            p &#x3D; re.compile(&#39;&lt;[^&gt;]+&gt;&#39;)</span><br><span class="line">            e &#x3D; p.sub(&quot;&quot;, d)</span><br><span class="line">            total&#x3D;c + &quot;\t&quot; + e+&quot;\n&quot;</span><br><span class="line">            f.write(total)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    else:</span><br><span class="line">        pass</span><br></pre></td></tr></table></figure>
+<p>之所以与之前写的那个爬取ip的那篇文章的代码有些区别是因为，维基百科中的td标签所包裹的内容并不是那么“干净”，其中有些是超链接，所以这就又涉及到了另一个知识点<a href="http://www.169it.com/article/9913111281939258943.html" target="_blank" rel="noopener">Python通过正则表达式获取,去除(过滤)或者替换HTML标签的几种方法</a></p>
+<h4 id="关于用ECharts"><a href="#关于用ECharts" class="headerlink" title="关于用ECharts"></a>关于用ECharts</h4><p>ECharts是一个开源的js包，用于更加便捷的生成各种图表，我直接用的是这种图表<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E4%BD%BF%E7%94%A8Python%E5%BC%80%E5%8F%91%E3%80%8A%E7%BA%A2%E6%A5%BC%E6%A2%A6%E3%80%8B%E4%BA%BA%E7%89%A9%E6%9F%A5%E8%AF%A2%E7%BD%91%E7%AB%992.png" alt=""><br>这个表的用法比较简单，直接按照它的例子准备数据就好了，<a href="http://www.cnblogs.com/emrys5/p/echart-relationship-map.html" target="_blank" rel="noopener">文章在此</a>与例子中不同的地方在此，我的init_data和link_data是由Django传入的，格式和例子中的差不多。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">data:init_data,</span><br><span class="line">links:link_data,</span><br></pre></td></tr></table></figure>
+<p>也就是在js中加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var init_data&#x3D;&#123;&#123;init_data | safe&#125;&#125;;</span><br><span class="line">var link_data&#x3D;&#123;&#123;link_data | safe&#125;&#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="关于sqlite数据库的使用"><a href="#关于sqlite数据库的使用" class="headerlink" title="关于sqlite数据库的使用"></a>关于sqlite数据库的使用</h4><p>之前没在django中使用数据库，但是听说django使用数据库的操作的便捷性已经成为一个有区别于其他框架的一个优点了。用起来也是很简单。<br>新建一个表，比如说我如下代码，就是在新建的app中的Model文件中，新建了一个包含name,symbolSize,des,color的名为mdata的表。<a href="https://code.ziqiangxuetang.com/django/django-models.html" target="_blank" rel="noopener">Django创建sqlite数据表的基础使用</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class mdata(models.Model):</span><br><span class="line">    name &#x3D; models.CharField(max_length&#x3D;30)</span><br><span class="line">    symbolSize &#x3D; models.IntegerField()</span><br><span class="line">    des &#x3D; models.CharField(max_length&#x3D;255)</span><br><span class="line">    color &#x3D; models.CharField(max_length&#x3D;30)</span><br></pre></td></tr></table></figure>
+<p>然后还需要用命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">先 cd 进入 manage.py 所在的那个文件夹下，输入下面的命令</span><br><span class="line"> </span><br><span class="line"># Django 1.6.x 及以下</span><br><span class="line">python manage.py syncdb</span><br><span class="line"> </span><br><span class="line"># Django 1.7 及以上的版本需要用以下命令</span><br><span class="line">python manage.py makemigrations</span><br><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure>
+<p>这时候就已经生成表了，为了更好的可视化的查看到，我用了navicate这个工具，这个工具可以查看大部分数据库。<a href="http://blog.csdn.net/yanggangclcsdn/article/details/51028655" target="_blank" rel="noopener">SQLite 的简单使用（以Navicat为例）</a><br>有了数据，如何从代码中读取数据库的值，sqlite为django提供了一套api来方便django来对其进行操作，具体的api可以查看这篇文字<a href="http://www.cnblogs.com/lhj588/archive/2012/02/17/2356478.html" target="_blank" rel="noopener">python django 数据库查询方法总结</a><br>譬如我的示例代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">from relation.models import mdata,mlinks</span><br><span class="line"></span><br><span class="line">all_data&#x3D;mdata.objects.all().values()</span><br><span class="line">    for i in range(340):</span><br><span class="line">        single_data&#x3D;all_data[i]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">        first_data &#x3D; &#123;&quot;name&quot;: single_data[&#39;name&#39;], &quot;des&quot;: single_data[&#39;des&#39;], &quot;symbolSize&quot;: single_data[&#39;symbolSize&#39;],</span><br><span class="line">                      &quot;itemStyle&quot;: &#123;&quot;normal&quot;: &#123;&quot;color&quot;: single_data[&#39;color&#39;]&#125;&#125;&#125;</span><br><span class="line">        init_data.append(first_data)</span><br></pre></td></tr></table></figure>
+
+<h4 id="关于部署到海外服务器"><a href="#关于部署到海外服务器" class="headerlink" title="关于部署到海外服务器"></a>关于部署到海外服务器</h4><p>要在服务器上下载docker，然后就是把本地的代码放到远程的服务器上，我的笔记本是通过ssh与远程服务器进行连接的，所以这就需要用到一个命令scp。用法参考这篇文章<a href="http://blog.csdn.net/jerome_s/article/details/44465217" target="_blank" rel="noopener">Linux下利用ssh远程文件传输 传输命令 scp</a><br>部署用了dockerfile和docker-compose<br>Dockerfile中的是这样写的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">FROM django:latest</span><br><span class="line">ENV PYTHONUNBUFFERED 1</span><br><span class="line">RUN mkdir &#x2F;code</span><br><span class="line">WORKDIR &#x2F;code</span><br><span class="line">ADD . &#x2F;code&#x2F;</span><br></pre></td></tr></table></figure>
+<p>docker-compose中是这样写的：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">web:</span><br><span class="line">  build: .</span><br><span class="line">  command: python manage.py runserver 0.0.0.0:8000</span><br><span class="line">  volumes:</span><br><span class="line">    - .:&#x2F;code</span><br><span class="line">  ports:</span><br><span class="line">    - &quot;8000:8000&quot;</span><br></pre></td></tr></table></figure>
+<p>最终的访问地址是<a href="http://45.77.203.232:8000/，还没买域名，等打折在买。" target="_blank" rel="noopener">http://45.77.203.232:8000/，还没买域名，等打折在买。</a><br>用法：<br>在输入框中输入人名，如“贾宝玉”，然后点击“go”，“贾宝玉”的那个节点就会由绿色变为红色。搜索谁，点击“go”对应的人物就会变红，所以更容易在绿色的海洋中发现那个节点，如果搜索多个人物，就会更容易顺着线来缕清人物的关系。搜索输入框的左侧还有个“C!”按钮，它的作用是还原，把颜色全部变为初始状态的绿色。</p>
+<h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><p><a href="http://www.169it.com/article/9913111281939258943.html" target="_blank" rel="noopener">Python通过正则表达式获取,去除(过滤)或者替换HTML标签的几种方法</a><br><a href="http://www.cnblogs.com/emrys5/p/echart-relationship-map.html" target="_blank" rel="noopener">EChart例子用法</a><br><a href="https://code.ziqiangxuetang.com/django/django-models.html" target="_blank" rel="noopener">Django创建sqlite数据表的基础使用</a><br><a href="http://blog.csdn.net/yanggangclcsdn/article/details/51028655" target="_blank" rel="noopener">SQLite 的简单使用（以Navicat为例）</a><br><a href="https://code.ziqiangxuetang.com/django/django-models.html" target="_blank" rel="noopener">Django创建sqlite数据表的基础使用</a><br><a href="http://blog.csdn.net/jerome_s/article/details/44465217" target="_blank" rel="noopener">Linux下利用ssh远程文件传输 传输命令 scp</a></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2018/12/30/2018年漫画小结/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2018/02/17/《塞尔达传说》与《马里奥-奥德赛》/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          <ul><li><a href="https://github.com/GallenHu/hexo-theme-Daily/wiki" target="_blank" rel="noopener">如何自定义这里的内容(配置教程)?</a></li></ul>
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Hexo &copy; 2020</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

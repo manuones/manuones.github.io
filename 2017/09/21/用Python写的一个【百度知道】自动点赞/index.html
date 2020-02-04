@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="John Doe">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="用Python写的一个【百度知道】自动点赞"/>
+  
+  <!--Open Graph Description-->
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Hexo"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>用Python写的一个【百度知道】自动点赞 - Hexo</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="Hexo" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            用Python写的一个【百度知道】自动点赞
+            
+          </h1>
+          <p class="posted-on">
+          2017-09-21
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/脚本/" rel="tag">
+                  脚本
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>偶然干这件事是因为同事发给我们一个百度知道的链接，让我们帮忙点赞，刚开始觉得下不为例，第一次点下以后就不用点了，后来第二天又要我们帮忙接着点，我就想是否能有更简便的方法来实现这件事，我最开始的想法是找几个百度的账号，然后登录点赞。</p>
+<p>偶然间，同事说百度知道不用登录也可以点赞。我后来尝试了一下发现确实是这样。心想，那这就是限制IP的。果不其然。后来发现百度知道点赞的规则大概是这样。每个IP每天可以点赞一次。于是我直接能想到的方法那就是更换IP点赞。</p>
+<p>其实我当时还有一个想法，那就是找到它的API，但很快想到，以百度的技术，肯定不会这么轻易的暴露API的。所以还是老老实实的用chrom浏览器+webdriver好了。</p>
+<p>我的实现方法分两部分，一个是找IP，一个是换IP。</p>
+<h3 id="一、找IP，建立IP池"><a href="#一、找IP，建立IP池" class="headerlink" title="一、找IP，建立IP池"></a>一、找IP，建立IP池</h3><p><a href="http://www.xicidaili.com/nn/1" target="_blank" rel="noopener">这个网站</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;www.xicidaili.com&#x2F;nn&#x2F;1</span><br></pre></td></tr></table></figure>
+<p>上可以找到很多代理IP，有些IP可以用，有些IP不能用，免费的就凑合用吧，用起来还是够用的。其中的https的IP，有效的居多，然后把这些IP地址和端口号爬下来。</p>
+<p>具体代码如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#encoding&#x3D;utf8</span><br><span class="line">import urllib2</span><br><span class="line">import BeautifulSoup</span><br><span class="line"></span><br><span class="line">User_Agent &#x3D; &#39;Mozilla&#x2F;5.0 (Windows NT 6.3; WOW64; rv:43.0) Gecko&#x2F;20100101 Firefox&#x2F;43.0&#39;</span><br><span class="line">header &#x3D; &#123;&#125;</span><br><span class="line">header[&#39;User-Agent&#39;] &#x3D; User_Agent</span><br><span class="line"></span><br><span class="line">url &#x3D; &#39;http:&#x2F;&#x2F;www.xicidaili.com&#x2F;nn&#x2F;1&#39;</span><br><span class="line">req &#x3D; urllib2.Request(url,headers&#x3D;header)</span><br><span class="line">res &#x3D; urllib2.urlopen(req).read()</span><br><span class="line"></span><br><span class="line">soup &#x3D; BeautifulSoup.BeautifulSoup(res)</span><br><span class="line">ips &#x3D; soup.findAll(&#39;tr&#39;)</span><br><span class="line">f &#x3D; open(&quot;test.txt&quot;,&quot;w&quot;)</span><br><span class="line"></span><br><span class="line">for x in range(1,len(ips)):</span><br><span class="line">    ip &#x3D; ips[x]</span><br><span class="line">    tds &#x3D; ip.findAll(&quot;td&quot;)</span><br><span class="line">    ip_temp &#x3D; tds[1].contents[0]+&quot;\t&quot;+tds[2].contents[0]+&quot;\n&quot;</span><br><span class="line">    # print tds[2].contents[0]+&quot;\t&quot;+tds[3].contents[0]</span><br><span class="line">    f.write(ip_temp)</span><br></pre></td></tr></table></figure>
+<p>直接抓取td的标签，然后把爬到的ip和端口号写入test.txt文件。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E7%94%A8Python%E5%86%99%E7%9A%84%E4%B8%80%E4%B8%AA%E3%80%90%E7%99%BE%E5%BA%A6%E7%9F%A5%E9%81%93%E3%80%91%E8%87%AA%E5%8A%A8%E7%82%B9%E8%B5%9E1.png" alt=""><br>譬如，爬到的数据<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E7%94%A8Python%E5%86%99%E7%9A%84%E4%B8%80%E4%B8%AA%E3%80%90%E7%99%BE%E5%BA%A6%E7%9F%A5%E9%81%93%E3%80%91%E8%87%AA%E5%8A%A8%E7%82%B9%E8%B5%9E2.png" alt=""></p>
+<h3 id="二、更换IP访问，模拟点赞操作"><a href="#二、更换IP访问，模拟点赞操作" class="headerlink" title="二、更换IP访问，模拟点赞操作"></a>二、更换IP访问，模拟点赞操作</h3><p>先上代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">from selenium import webdriver</span><br><span class="line"></span><br><span class="line">from selenium.webdriver.support.wait import WebDriverWait</span><br><span class="line">from selenium.webdriver.common.by import By</span><br><span class="line">from selenium.webdriver.support import expected_conditions as EC</span><br><span class="line"></span><br><span class="line">#从IP池中取出IP和接口</span><br><span class="line">host&#x3D;[]</span><br><span class="line">port&#x3D;[]</span><br><span class="line">proxys&#x3D;[]</span><br><span class="line">#从IP池中取出IP和接口</span><br><span class="line">with open(&#39;test.txt&#39;,&#39;r&#39;) as f0:</span><br><span class="line">    for i in f0:</span><br><span class="line">        tmp&#x3D;i.split()</span><br><span class="line">        host.append(tmp[0])</span><br><span class="line">        port.append(tmp[1])</span><br><span class="line"></span><br><span class="line">for h,p in zip(host,port):</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    PROXY &#x3D; h+&quot;:&quot;+p</span><br><span class="line">    chrome_options &#x3D; webdriver.ChromeOptions()</span><br><span class="line">    chrome_options.add_argument(&#39;--proxy-server&#x3D;&#123;0&#125;&#39;.format(PROXY))</span><br><span class="line">    chrome &#x3D; webdriver.Chrome(executable_path&#x3D;&#39;&#x2F;Users&#x2F;mac&#x2F;Desktop&#x2F;chromedriver&#39;, chrome_options&#x3D;chrome_options)</span><br><span class="line">    try:</span><br><span class="line">        #访问要点赞的百度知道的网址</span><br><span class="line">      chrome.get(&#39;https:&#x2F;&#x2F;zhidao.baidu.com&#x2F;question&#x2F;621673501705715932.html&#39;)</span><br><span class="line">        #点赞的按钮的ID是固定的，找到对应答案的点赞按钮的ID</span><br><span class="line">      WebDriverWait(chrome, 20).until(EC.visibility_of_element_located((By.ID, &#39;evaluate-2796284381&#39;)))</span><br><span class="line">      elem &#x3D; chrome.find_element_by_id(&quot;evaluate-2796284381&quot;).click()</span><br><span class="line">    #如果IP不能使用，抛出异常，程序继续循环执行</span><br><span class="line"></span><br><span class="line">    except Exception, e:</span><br><span class="line">        print PROXY</span><br><span class="line">        print e</span><br><span class="line">        continue</span><br></pre></td></tr></table></figure>
+<p>做过web自动化测试或者爬虫的，对selenium应该不会很陌生。加入WebDriverWait是因为在实际使用过程中，发现等待网页加载出来，会需要一段时间。怎么说，也是好歹能用。</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/%E7%94%A8Python%E5%86%99%E7%9A%84%E4%B8%80%E4%B8%AA%E3%80%90%E7%99%BE%E5%BA%A6%E7%9F%A5%E9%81%93%E3%80%91%E8%87%AA%E5%8A%A8%E7%82%B9%E8%B5%9E3.png" alt="找点赞按钮的ID"></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2017/10/17/Django与Vue之间的数据传递/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2017/08/17/实验音乐颠僧-小河/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          <ul><li><a href="https://github.com/GallenHu/hexo-theme-Daily/wiki" target="_blank" rel="noopener">如何自定义这里的内容(配置教程)?</a></li></ul>
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Hexo &copy; 2020</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="John Doe">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="Django与Vue之间的数据传递"/>
+  
+  <!--Open Graph Description-->
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Hexo"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>Django与Vue之间的数据传递 - Hexo</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="Hexo" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            Django与Vue之间的数据传递
+            
+          </h1>
+          <p class="posted-on">
+          2017-10-17
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/Python/" rel="tag">
+                  Python
+                </a>
+              
+                <a href="/tags/前端/" rel="tag">
+                  前端
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>用vue或者说写前端页面，最重要的一个问题，就应该是解决前端与后端的数据交换的问题，或者前端页面传递给后端页面，或者后端函数处理后返回给前端。如果能熟练解决这个问题，那就已经走了一大步。<br>我做目前的这个项目，一步一步摸索着走，踩了一些坑。在这里总结下：</p>
+<h4 id="问题1：django模板与vue的冲突。"><a href="#问题1：django模板与vue的冲突。" class="headerlink" title="问题1：django模板与vue的冲突。"></a>问题1：django模板与vue的冲突。</h4><p>比如在vue中添加data数据：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">var example1 &#x3D; new Vue(&#123;</span><br><span class="line">  el: &#39;#example-1&#39;,</span><br><span class="line">  data: &#123;</span><br><span class="line">    items: [</span><br><span class="line">      &#123; message: &#39;Foo&#39; &#125;,</span><br><span class="line">      &#123; message: &#39;Bar&#39; &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line">    great:function()&#123;</span><br><span class="line">        console.log(&#39;xixi&#39;)</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>这样有了两个数据，按照官方文档的说法是，在html中用<code></code>这样就能获取到items的数据。<br>但现实情况是数据并不能找到，在用开发者工具的vue（需要单独安装）查看，是有数据的，说明数据已经生成，但是在html中就是不能引用到，而且没有报错信息。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E4%B8%8EVue%E4%B9%8B%E9%97%B4%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%92%EF%BC%881%EF%BC%89.png" alt=""><br>这就是最不好解决的bug，没有报错信息。后来问了前端大牛，得知是和Django有冲突，后来在<a href="https://my.oschina.net/soarwilldo/blog/755984" target="_blank" rel="noopener">这篇文章</a>中找到了解决方案。</p>
+<blockquote>
+<p>django模板与vue.js的变量都是使用“”包裹起来的</p>
+</blockquote>
+<p>我使用的是其中的方法3,这个方法的原理是和之间的部分，Django不对其进行渲染。然后就可以留给Vue来渲染了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;% verbatim %&#125;</span><br><span class="line">    &#123;&#123; vue &#125;&#125;</span><br><span class="line">&#123;% endverbatim %&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="问题2：Django的数据传递给Vue"><a href="#问题2：Django的数据传递给Vue" class="headerlink" title="问题2：Django的数据传递给Vue"></a>问题2：Django的数据传递给Vue</h4><p>Vue.js中的js中的数据能够传递给html，能够在视图中显示出来了。那js中的数据是从哪来的，这就涉及到与后台的交互了，需要从后台拿到数据。<br>首先是Django中有数据的部分：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">def home(request):</span><br><span class="line">    List&#x3D;[&#123;&#39;age&#39;:18&#125;,200]</span><br><span class="line">    OBJ&#x3D;&#123;&quot;name&quot;:&quot;隔壁老王&quot;&#125;</span><br><span class="line"></span><br><span class="line">    return render(request, &#39;add_files.html&#39;,&#123;</span><br><span class="line">        &#39;list&#39;:json.dumps(List),</span><br><span class="line">        &#39;obj&#39;:json.dumps(OBJ)</span><br><span class="line">    &#125;)</span><br></pre></td></tr></table></figure>
+<p>传递数据是用json传递过去的，否则会报错，所以需要用dumps处理成json数据格式。Vue中的代码接收代码为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;!doctype html&gt;</span><br><span class="line">&lt;html lang&#x3D;&quot;en&quot;&gt;</span><br><span class="line">&lt;head&gt;&lt;&#x2F;head&gt;</span><br><span class="line">&lt;body&gt;&lt;&#x2F;body&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">  var list &#x3D; &#123;&#123; list | safe &#125;&#125;</span><br><span class="line">  var obj &#x3D; &#123;&#123; obj | safe &#125;&#125;</span><br><span class="line">&lt;&#x2F;script&gt;</span><br><span class="line">&lt;&#x2F;html&gt;</span><br></pre></td></tr></table></figure>
+<p>需要用这种格式才能接收到。代码参考自<a href="http://www.jianshu.com/p/fe74907e16b9" target="_blank" rel="noopener">Django + Vue 单页面应用的开发环境搭建步骤</a></p>
+<h4 id="问题3：Vue传递数据给Django"><a href="#问题3：Vue传递数据给Django" class="headerlink" title="问题3：Vue传递数据给Django"></a>问题3：Vue传递数据给Django</h4><p>既然是交互，就应该是相互的。后端接收前端的操作反馈然后调用函数进行处理是一个很常见的场景。所以需要将前端数据发给后端。我最开始想法是，前端能够之间调用后端的函数，比如说按钮的响应事件就能够和后端的函数直接进行绑定。后来发现暂时我的这种想法还是不太现实。那现实的情况是：</p>
+<p>用post！，也就是说进行http请求，听说vue-resouse以后官方不再进行维护了，尤雨溪推荐用axios来代替。关于axios可以参考github文档，也可以参考这篇文章<a href="https://ykloveyxk.github.io/2017/02/25/axios%E5%85%A8%E6%94%BB%E7%95%A5/" target="_blank" rel="noopener">axios全攻略</a><br>直接把其中的下面的代码放到method的对应的函数中即可，然后在把路由改改</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">axios.post(&#39;&#x2F;user&#39;, &#123;</span><br><span class="line">    firstName: &#39;Fred&#39;,</span><br><span class="line">    lastName: &#39;Flintstone&#39;</span><br><span class="line">  &#125;)</span><br><span class="line">  .then(function (response) &#123;</span><br><span class="line">    console.log(response);</span><br><span class="line">  &#125;)</span><br><span class="line">  .catch(function (error) &#123;</span><br><span class="line">    console.log(error);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
+<p>但如果那样会提示这样的错误</p>
+<blockquote>
+<p>You called this URL via POST, but the URL doesn’t end in a slash and you have APPEND_SLASH set. Django can’t redirect to the slash URL while maintaining POST data. Change your form to point to 127.0.0.1:8000/add/ (note the trailing slash), or set APPEND_SLASH=False in your Django settings.</p>
+</blockquote>
+<p>解决这个问题，我是通过<a href="https://stackoverflow.com/questions/9738824/django-post-url-error" target="_blank" rel="noopener">这篇文章</a>找到的解决方案</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">First, make sure that you send the request to http:&#x2F;&#x2F;127.0.0.1&#x2F;add&#x2F;</span><br><span class="line"> not http:&#x2F;&#x2F;127.0.0.1&#x2F;add</span><br><span class="line"></span><br><span class="line">Secondly, you may also want to exempt the view from csrf processing by adding the &#96;@csrf_exempt</span><br><span class="line">&#96;decorator - since you aren&#39;t sending the appropriate token from cURL.</span><br></pre></td></tr></table></figure>
+<p>一个原因是在地址的后面加”/“,如果不加，Django是要寻找外网的地址。第二是要加上 <code>@csrf_exempt</code>，这个在哪里加？参考这篇文章<a href="http://python.usyiyi.cn/translate/django_182/ref/csrf.html" target="_blank" rel="noopener">跨站请求伪造保护-Django官方文档</a>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from django.views.decorators.csrf import csrf_exempt</span><br><span class="line">from django.http import HttpResponse</span><br><span class="line"></span><br><span class="line">@csrf_exempt</span><br><span class="line">def my_view(request):</span><br><span class="line">    return HttpResponse(&#39;Hello world&#39;)</span><br></pre></td></tr></table></figure>
+<p>举例代码如上，这个装饰器的意义就是用来标记此部分不受保护。</p>
+<h4 id="问题4：关于render和HttpResponse的使用"><a href="#问题4：关于render和HttpResponse的使用" class="headerlink" title="问题4：关于render和HttpResponse的使用"></a>问题4：关于render和HttpResponse的使用</h4><p>接上面那个问题，这时后台已经能够收到js发来的数据，想要处理之后重新返回给前端，但是这时候，我用问题2的方法，返回给前端的是一个html数据，并不是一个数组。最后通过HttpResponse这个方法<a href="http://www.cnblogs.com/psklf/p/5542612.html" target="_blank" rel="noopener">Django 前后台的数据传递</a>给解决了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@csrf_exempt</span><br><span class="line">def newmodle(request):</span><br><span class="line">    aa&#x3D;&#123;&quot;a&quot;:&quot;aa&quot;,&quot;b&quot;:&quot;bb&quot;&#125;</span><br><span class="line">    if request.method &#x3D;&#x3D;&#39;POST&#39;:</span><br><span class="line">        return HttpResponse(json.dumps(aa))</span><br><span class="line">        print request.body</span><br></pre></td></tr></table></figure>
+<p>这样处理后，在前端</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">axios.post(&#39;&#x2F;newmodle&#x2F;&#39;, &#123;</span><br><span class="line">            firstName: &#39;Fred&#39;,</span><br><span class="line">            lastName: &#39;Flintstone&#39;</span><br><span class="line">          &#125;)</span><br><span class="line">          .then(function (response) &#123;</span><br><span class="line">            </span><br><span class="line">            console.log(response)</span><br><span class="line"></span><br><span class="line">          &#125;)</span><br></pre></td></tr></table></figure>
+<p>就可以接收到数据了。写到这里我发现，可能和用render和HttpResponse没关系，可能我刚开始是用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var aa&#x3D;&#123;&#123;aa | safe&#125;&#125;</span><br><span class="line">   console.log(aa)</span><br></pre></td></tr></table></figure>
+<p>这样来获取数据的，这样是不能获取到的，后来我就直接打印的response，这个可能和这里有关系。</p>
+<h4 id="参考文章："><a href="#参考文章：" class="headerlink" title="参考文章："></a>参考文章：</h4><p><a href="https://my.oschina.net/soarwilldo/blog/755984" target="_blank" rel="noopener">django模板与vue.js冲突问题</a><br><a href="http://www.jianshu.com/p/fe74907e16b9" target="_blank" rel="noopener">Django + Vue 单页面应用的开发环境搭建步骤</a><br><a href="http://python.usyiyi.cn/translate/django_182/ref/csrf.html" target="_blank" rel="noopener">跨站请求伪造保护-Django官方文档</a><br><a href="http://www.cnblogs.com/psklf/p/5542612.html" target="_blank" rel="noopener">Django 前后台的数据传递</a></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2018/01/17/费解的《百年孤独》/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2017/09/21/用Python写的一个【百度知道】自动点赞/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          <ul><li><a href="https://github.com/GallenHu/hexo-theme-Daily/wiki" target="_blank" rel="noopener">如何自定义这里的内容(配置教程)?</a></li></ul>
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Hexo &copy; 2020</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

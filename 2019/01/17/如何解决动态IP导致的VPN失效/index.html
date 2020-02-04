@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="John Doe">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="如何解决动态IP导致的VPN失效"/>
+  
+  <!--Open Graph Description-->
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Hexo"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>如何解决动态IP导致的VPN失效 - Hexo</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="Hexo" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            如何解决动态IP导致的VPN失效
+            
+          </h1>
+          <p class="posted-on">
+          2019-01-17
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/网络/" rel="tag">
+                  网络
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>文章主要分三个部分，前面的偏基础，重点在最后第三条，是写的如何解决动态ip导致的一系列问题。有需要的话，可以直接到最后查看。</p>
+<h3 id="想要实现的目标："><a href="#想要实现的目标：" class="headerlink" title="想要实现的目标："></a>想要实现的目标：</h3><p>1.通过公司内网的网段可以直接访问阿里云上的服务器主机，VPN 可以将一个机构的多个数据中心通过隧道的方式连接起来，让机构感觉像是在一个数据中心里面。<br>2.在公司之外，无论在祖国各地，五湖四海，只要是能联网的地方，就能访问到公司内网。</p>
+<h3 id="具体的实现"><a href="#具体的实现" class="headerlink" title="具体的实现"></a>具体的实现</h3><h5 id="1-打通公司内网到阿里云的VPN通道"><a href="#1-打通公司内网到阿里云的VPN通道" class="headerlink" title="1.打通公司内网到阿里云的VPN通道"></a>1.打通公司内网到阿里云的VPN通道</h5><p>首先要说的就是通过公司内网访问阿里云上的服务器。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%881.png" alt="IPsec连接"></p>
+<p>这样说比较抽象，举个例子，如果我阿里云上的某台服务器的ip是<code>188.100.100.1</code>，那我要实现的效果是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping 188.100.100.1</span><br></pre></td></tr></table></figure>
+<p>能够ping通，当然首先要保证的是我这台服务器的ip和公司内网的网段不冲突，也就是说阿里云的vpc（Virtual Private Cloud可以理解为分配给服务器的私有网段）和公司内网正常办公的网段不冲突。</p>
+<p>在这里要注意的一点，是先设置路由器，然后在去阿里云上做设置。</p>
+<p>在阿里云中做这些设置：</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%882.png" alt="阿里云vpc中的vpn设置"></p>
+<p><code>vpn网关：</code><br>这里的vpn网关，一般指的是公司服务器集群总的网关，是一个固定IP作为网络的输入口，这里我们是不用新建设置的。注意这里的ip，是我们要用到的。</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%883.png" alt="vpn网关"></p>
+<p><code>用户网关：</code><br>用户网关这里的ip就是我们公司的外网ip，获得外网ip的方法有很多种，比如访问<code>http://www.ip138.com/</code>，这里需要我们新建<code>创建用户网关</code>来填入我们的ip。</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%884.png" alt="用户网关"></p>
+<p><code>IPsec连接：</code><br>这一步就是集大成的关键性一步了。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%885.png" alt="IPsec连接"><br>这里的VPN网关和用户网关都选择我们上一步设置好的选择就好。这里的<code>本端网段</code>填写的是阿里云的VPC网段。而<code>对端网段</code>填写的是我们公司内网分配给设备上网的网段。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%886.png" alt="新建A"><br>还有就是约定好喝公司的网关路由器上的共享秘钥。和加密算法之类的，保证云上和本地配置的一致。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%887.png" alt="新建B"></p>
+<p><code>重要的一点</code>：如果你保证你配置的没问题，但还是提示‘第二阶段协商未成功’这样的错误。很可能是因为比较玄学，要先去路由器做好配置，然后在阿里云上做好配置，要保证一个顺序的先后性。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%888.png" alt=""></p>
+<h4 id="2-打通外部到公司内部的VPN通道"><a href="#2-打通外部到公司内部的VPN通道" class="headerlink" title="2.打通外部到公司内部的VPN通道"></a>2.打通外部到公司内部的VPN通道</h4><p>也就是下图中的移动办公的这种场景：<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%889.png" alt="移动办公VPN"></p>
+<p>要达到的效果说的实例化一点就是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ping 188.100.100.1</span><br></pre></td></tr></table></figure>
+<p>能够ping通，值得注意的一点是这里的<code>188.100.100.1</code>是阿里云上服务器的内网ip，也就是说，并不只是从公司外访问公司内的某台设备那样简单，而是要穿过两层vpn隧道。</p>
+<p>这里要在网关上分配一个网段，来给进来的设备。相当于从外部访问的设备进来后，就相当于一个内网的设备。</p>
+<p>采用的是PPTP协议连接。在路由器上做些配置就OK了。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%8810.png" alt="在路由器的networks中设置"></p>
+<p>Windows电脑自带PPTP，Mac电脑可以用Shimo软件连接。填写公司的ip地址，和分配给你的username和password就好了。</p>
+<p>这样后，可以ping通内网设备，但是并不能ping的通<code>188.100.100.1</code>。这个问题很奇葩。查了很多资料，终于找到了<a href="https://www.v2ex.com/t/109521" target="_blank" rel="noopener">这个办法</a>试了试。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%8811.png" alt="v2ex上的v友的回答"></p>
+<p>但这里值得注意的一点是：在一些路由器上，如unifi路由器，在输入框中是不允许填写和内网网段重复的网段的。所以，我的做法是到路由器中，改写<code>etc/pptpd.conf</code>这个文件，设置remoteip，把它的网段改为和内网相同的网段。这里还有一点是值得注意的是，分配的ip不要和已有的分配给内网的设备的ip重复。所以我的做法是选择了ip网段的后面几位。localip是pptp的服务器的地址。如果用traceroute命令查看，访问非局域网，会有显示这个地址。<br>更改后，保存，并使其生效。重启生效的命令为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service pptpd restart</span><br></pre></td></tr></table></figure>
+
+
+
+
+<h4 id="3-精华：解决动态IP导致的问题"><a href="#3-精华：解决动态IP导致的问题" class="headerlink" title="3.精华：解决动态IP导致的问题"></a>3.精华：解决动态IP导致的问题</h4><p>如今，无论是对于家庭网络还是公司网络（家庭网络与公司网络一个重要的区别是：公司网络是上传和下载的速度相同），网络运营商默认提供的网络，都不是固定IP，而是动态IP。如果我们去找网络运营商去要求固定IP，运营商会很客服的告诉你，当然可以提供这项套餐的，然后转而告诉你，这个得加钱。而固定套餐的价格相比于动态IP的套餐的价格要高出数倍。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%8812.png" alt=""></p>
+<p>因为遇到了动态IP，使得我原有的设置，复杂了至少两倍。我所遇到的困难：</p>
+<ul>
+<li><p>IP地址经常更换，每次重启路由器后，都会导致IP变化。这使得如果IP每次变化后，我都需要到阿里云上重新新建用户网关和IPsec连接，同时配置本地网络。还有pptpd.conf文件也会重新恢复原样。</p>
+</li>
+<li><p>Unifi网关的路由器系统的Linux版本，对linux包源进行了限制，比如wget都不能下载安装，所幸提供了Python，但是也仅仅支持Python2，Python的第三方包也不能下载，比如常用的requests包。</p>
+</li>
+</ul>
+<p>我们把这些问题拆分化，一一解决：</p>
+<h5 id="通过阿里云API接口来创建IPsec连接"><a href="#通过阿里云API接口来创建IPsec连接" class="headerlink" title="通过阿里云API接口来创建IPsec连接"></a>通过阿里云API接口来创建IPsec连接</h5><p>对于创建用户网关和IPsec连接，阿里云是提供一个公共的API接口用户创建和删除的，可以参考这个链接<a href="https://www.alibabacloud.com/help/zh/doc-detail/53042.htm?spm=a2c63.p38356.b99.128.ac475703enNlTK" target="_blank" rel="noopener">阿里云VPN接口文档</a></p>
+<p>当然并不只是看文档这么简单，文档里并没有提供Python的示例代码。搜索后发现一些都是Java代码，零星的几个Python代码还跑不起来。所有这里直接黏贴上我组合后的Python2代码，Python3只要稍稍改动部分，就可以跑的起来，这个我稍后会写。<br>Python2调用阿里云API示例代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line">import base64</span><br><span class="line">import urllib</span><br><span class="line">import hmac</span><br><span class="line">from hashlib import sha1</span><br><span class="line">import requests</span><br><span class="line">import uuid</span><br><span class="line">import time</span><br><span class="line">import hmac,ssl</span><br><span class="line">ALIYUN_ACCESS_KEY_ID&#x3D;&quot;&quot;#在阿里云上生成</span><br><span class="line">ALIYUN_ACCESS_KEY_SECRET&#x3D;&quot;&quot;#在阿里云上生成</span><br><span class="line"> </span><br><span class="line">try:</span><br><span class="line">    _create_unverified_https_context &#x3D; ssl._create_unverified_context</span><br><span class="line">except AttributeError:</span><br><span class="line">    # Legacy Python that doesn&#39;t verify HTTPS certificates by default</span><br><span class="line">    pass</span><br><span class="line">else:</span><br><span class="line">    # Handle target environment that doesn&#39;t support HTTPS verification</span><br><span class="line">    ssl._create_default_https_context &#x3D; _create_unverified_https_context</span><br><span class="line"> </span><br><span class="line">D &#x3D; &#123;</span><br><span class="line">    &#39;Format&#39;:&#39;JSON&#39;,</span><br><span class="line">    &#39;Version&#39;:&#39;2016-04-28&#39;,</span><br><span class="line">    &#39;SignatureMethod&#39;:&#39;HMAC-SHA1&#39;</span><br><span class="line">    &#125;</span><br><span class="line">timestamp &#x3D; time.strftime(&quot;%Y-%m-%dT%H:%M:%SZ&quot;, time.gmtime())</span><br><span class="line">D[&#39;SignatureNonce&#39;]&#x3D;str(uuid.uuid1())</span><br><span class="line">D[&#39;SignatureVersion&#39;]&#x3D;1.0</span><br><span class="line">D[&#39;AccessKeyId&#39;]&#x3D;ALIYUN_ACCESS_KEY_ID</span><br><span class="line">D[&#39;Timestamp&#39;]&#x3D;timestamp</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">def percent_encode(encodeStr):</span><br><span class="line">    encodeStr &#x3D; str(encodeStr)</span><br><span class="line">    #res &#x3D; urllib.parse.quote(encodeStr)</span><br><span class="line">    res &#x3D; urllib.quote_plus(encodeStr)</span><br><span class="line">    res &#x3D; res.replace(&#39;+&#39;, &#39;%20&#39;)</span><br><span class="line">    res &#x3D; res.replace(&#39;*&#39;, &#39;%2A&#39;)</span><br><span class="line">    res &#x3D; res.replace(&#39;%7E&#39;, &#39;~&#39;)</span><br><span class="line">    res &#x3D; res.replace(&#39;&#x2F;&#39;, &#39;%2F&#39;)  #That is for the LocalSubnet &quot;&#x2F;&quot;</span><br><span class="line">    return res</span><br><span class="line"> </span><br><span class="line">def sign(parameters):</span><br><span class="line">    sortedParameters &#x3D; sorted(parameters.items(), key&#x3D;lambda parameters: parameters[0])</span><br><span class="line">    canonicalizedQueryString &#x3D; &#39;&#39;</span><br><span class="line">    for (k, v) in sortedParameters:</span><br><span class="line">        canonicalizedQueryString +&#x3D; &#39;&amp;&#39; + percent_encode(k) + &#39;&#x3D;&#39; + percent_encode(v)</span><br><span class="line">    print(canonicalizedQueryString)</span><br><span class="line">    stringToSign &#x3D; &#39;GET&amp;%2F&amp;&#39; + percent_encode(canonicalizedQueryString[1:])  </span><br><span class="line">    bs &#x3D; ALIYUN_ACCESS_KEY_SECRET + &#39;&amp;&#39;</span><br><span class="line">    bs &#x3D; bytes(bs).encode(&#39;utf8&#39;)</span><br><span class="line">    stringToSign &#x3D; bytes(stringToSign).encode(&#39;utf8&#39;)</span><br><span class="line">    h &#x3D; hmac.new(bs, stringToSign, sha1)</span><br><span class="line">    # 进行编码</span><br><span class="line">    signature &#x3D; base64.b64encode(h.digest()).strip()</span><br><span class="line">    return signature</span><br><span class="line"></span><br><span class="line">def genipsec(ip,customId):</span><br><span class="line">    D[&#39;Action&#39;]&#x3D;&quot;CreateVpnConnection&quot;</span><br><span class="line">    D[&#39;CustomerGatewayId&#39;]&#x3D;customId</span><br><span class="line">    D[&#39;VpnGatewayId&#39;]&#x3D;&quot;&quot;</span><br><span class="line">    D[&#39;RegionId&#39;]&#x3D;&quot;cn-shanghai&quot;</span><br><span class="line">    D[&#39;Name&#39;]&#x3D;&quot;newIPsec&quot;+ip</span><br><span class="line">    D[&#39;LocalSubnet&#39;]&#x3D;&quot;&quot;</span><br><span class="line">    D[&#39;RemoteSubnet&#39;]&#x3D;&quot;&quot;</span><br><span class="line">    D[&#39;EffectImmediately&#39;]&#x3D;True</span><br><span class="line">    D[&#39;IkeConfig&#39;]&#x3D;&#123;&quot;Psk&quot;:&quot;&quot;,&#39;IkeVersion&#39;:&#39;&#39;,&#39;IkeMode&#39;:&#39;&#39;,&#39;IkeEncAlg&#39;:&#39;&#39;,</span><br><span class="line">            &#39;IkeAuthAlg&#39;:&#39;&#39;,&#39;IkePfs&#39;:&#39;&#39;,&#39;IkeLifetime&#39;:&#39;&#39;,&#39;LocalIdIPsec&#39;:&#39;&#39;,&#39;RemoteId&#39;:ip&#125;</span><br><span class="line">    D[&#39;IpsecConfig&#39;]&#x3D;&#123;&#39;IpsecEncAlg&#39;:&#39;&#39;,&#39;IpsecAuthAlg&#39;:&#39;&#39;,&#39;IpsecPfs&#39;:&#39;&#39;,&#39;IpsecLifetime&#39;:&#39;&#39;&#125;</span><br><span class="line">    D[&#39;Signature&#39;] &#x3D; sign(D)</span><br><span class="line">     </span><br><span class="line">     </span><br><span class="line">    sortedParameters &#x3D; sorted(D.items(), key&#x3D;lambda D: D[0])</span><br><span class="line">     </span><br><span class="line">    url &#x3D; &#39;https:&#x2F;&#x2F;vpc.aliyuncs.com&#x2F;?&#39; + urllib.urlencode(sortedParameters)</span><br><span class="line">    r &#x3D; requests.get(url)</span><br><span class="line">    print(r.text)</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>关于这块代码的原理可以参见这篇文章<a href="https://www.jianshu.com/p/7574349a5042" target="_blank" rel="noopener">阿里云 API 签名机制的 Python 实现</a></p>
+</li>
+<li><p>将此段Python2的代码变为python3的代码，需要改动两个地方，一个是<code>import urllib</code>变为<code>import urllib.parse</code>,还有就是就是转码python2为<code>bytes(bs).encode(&#39;utf8&#39;)</code>,python3为<code>bytes(bs,encoding=&#39;utf8&#39;)</code></p>
+</li>
+<li><p>阿里云提供的文档中，有一个容易引起人们误解的地方就是：<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%8813.png" alt="阿里云vpn文档"><br>我在代码中要构建一个字典，需要构建key和value，这里的key值，不要填写阿里云文档中的<code>IkeConfig.Psk</code>这样的格式，而是添加<code>PSK</code>,如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">D[&#39;IkeConfig&#39;]&#x3D;&#123;&quot;Psk&quot;:&quot;&quot;,&#39;IkeVersion&#39;:&#39;&#39;,&#39;IkeMode&#39;:&#39;&#39;,&#39;IkeEncAlg&#39;:&#39;&#39;,</span><br><span class="line">            &#39;IkeAuthAlg&#39;:&#39;&#39;,&#39;IkePfs&#39;:&#39;&#39;,&#39;IkeLifetime&#39;:&#39;&#39;,&#39;LocalIdIPsec&#39;:&#39;&#39;,&#39;RemoteId&#39;:ip&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>其他示例的Python代码中还有一种情况没有涉及，就是因为我需要在LocalSubnet那填写网段，这个网段里包含“/”字符，所以需要处理“/”这个字符的转换，所以我添加了如下的代码。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">res &#x3D; res.replace(&#39;&#x2F;&#39;, &#39;%2F&#39;)  #That is for the LocalSubnet &quot;&#x2F;&quot;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="如何监测IP变化"><a href="#如何监测IP变化" class="headerlink" title="如何监测IP变化"></a>如何监测IP变化</h5><p>方案是这样：在路由器的linux系统中通过crontab跑一个定时检测ip变化的脚本，如果有变化则触发相应的后续的一系列创建和修改的操作。所以包含四部分：<br>1.crontab怎么写？<br>2.如何获取实时公网ip？<br>3.在哪找到源ip来实时的与当前ip做对比来判断ip是否发生了变化？<br>4.在一个处处受限的linux系统下，如何进行一系列的后续复杂操作？</p>
+<ul>
+<li>crontab 定时执行python脚本</li>
+</ul>
+<p>关于crontab的用法可以参考这篇文章<a href="https://blog.csdn.net/ybsun2010/article/details/9972403" target="_blank" rel="noopener">crontab 定时执行python脚本</a>。通过crontab命令的一个重大好处是：机器重启之后，依然生效。<br>用到的主要是这两条命令：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">crontab -e   #编写定时任务</span><br><span class="line">crontab -l    #列出已经在运行的定时任务</span><br></pre></td></tr></table></figure>
+<p>每两分钟检查一次<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%8814.png" alt=""><br>在当前目录下，生成了log<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%8815.png" alt=""></p>
+<ul>
+<li>获取实时的公网IP的方法</li>
+</ul>
+<p>可以用如下代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;python</span><br><span class="line"># -*- coding:utf8 -*-</span><br><span class="line"></span><br><span class="line">import urllib2</span><br><span class="line">import re</span><br><span class="line"></span><br><span class="line">url &#x3D; urllib2.urlopen(&quot;http:&#x2F;&#x2F;txt.go.sohu.com&#x2F;ip&#x2F;soip&quot;)</span><br><span class="line">text &#x3D; url.read()</span><br><span class="line">ip &#x3D; re.findall(r&#39;\d+.\d+.\d+.\d+&#39;,text)</span><br><span class="line"></span><br><span class="line">print(ip[0])</span><br></pre></td></tr></table></figure>
+<p>转换为python3的代码需要改动<code>urllib.parse</code></p>
+<ul>
+<li>判断公网ip是否变化</li>
+</ul>
+<p>这个解决方法，并不能把第一次的ip给写死，因为路由器会经常重启，不能每次重启都要重新更改代码，把ip重新写死。这里的做法是在路由器中读取<code>etc/ipsec.conf</code>的文件，这个文件中有当前路由的公网ip，而且当ip变化时，我们也需要更改这个文件。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def getOriginIp():</span><br><span class="line">    with open(&#39;&#x2F;etc&#x2F;ipsec.conf&#39;, &#39;r+&#39;) as f:</span><br><span class="line">        for line in f.readlines():</span><br><span class="line">            if re.search(&#39;left&#x3D;&#39;,line):</span><br><span class="line">                text&#x3D;line.decode(&#39;GBK&#39;)</span><br><span class="line">                ip &#x3D; re.findall(r&#39;\d+.\d+.\d+.\d+&#39;,text)</span><br><span class="line">                return ip[0]</span><br></pre></td></tr></table></figure>
+<p>通过这个OriginIp与当前的IP进行对比，如果有变化，需要去执行后面的一系列操作。</p>
+<ul>
+<li>在一个处处受限的linux系统下，如何进行一系列的后续复杂操作？</li>
+</ul>
+<p>Unifi路由器的linux系统处处受限，那后续的操作我就不放在路由器上了。于是，我就把后续的一些复杂点的操作移到了另外一台服务器上，路由器上的任务就变成了只负责检测ip变化，如果有变化，通过<code>curl</code>命令去触发另一台服务器。</p>
+<p>在另一台服务器上，搭建一台web服务器，我的愿景是尽量少下载第三方包，所以我并没有flask框架，而是用了python原生的一个web服务。大家可能之前听说python中有个内建的http服务器，只要通过这个命令就能开启（详情参见<a href="https://coolshell.cn/articles/1480.html" target="_blank" rel="noopener">非常简单的PYTHON HTTP服务</a>）：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python -m SimpleHTTPServer 8080</span><br></pre></td></tr></table></figure>
+<p>于是，我就找到了Python2自带的包<code>BaseHTTPRequestHandler</code>,用法可以参考这篇文章<a href="http://cizixs.com/2016/05/20/python-httpserver" target="_blank" rel="noopener">Python BaseHTTPServer 介绍</a>。我这里展示一个最简单的用法，通过<code>crul http://localhost:8888</code>就可以执行HelloWorld函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">from BaseHTTPServer import BaseHTTPRequestHandler</span><br><span class="line">import cgi</span><br><span class="line">import json</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">def HelloWorld():</span><br><span class="line">    print(&quot;hello world&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class TodoHandler(BaseHTTPRequestHandler):</span><br><span class="line">    &quot;&quot;&quot;A simple TODO server</span><br><span class="line"></span><br><span class="line">    which can display and manage todos for you.</span><br><span class="line">    &quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    # Global instance to store todos. You should use a database in reality.</span><br><span class="line">    TODOS &#x3D; []</span><br><span class="line"></span><br><span class="line">    def do_GET(self):</span><br><span class="line">        # return all todos</span><br><span class="line"></span><br><span class="line">        if self.path !&#x3D; &#39;&#x2F;&#39;:</span><br><span class="line">            self.send_error(404, &quot;File not found.&quot;)</span><br><span class="line">            return</span><br><span class="line"></span><br><span class="line">        # Just dump data to json, and return it</span><br><span class="line">        message &#x3D; json.dumps(self.TODOS)</span><br><span class="line">       HelloWorld()</span><br><span class="line"></span><br><span class="line">        self.send_response(200)</span><br><span class="line">        self.send_header(&#39;Content-type&#39;, &#39;application&#x2F;json&#39;)</span><br><span class="line">        self.end_headers()</span><br><span class="line">        self.wfile.write(message)</span><br><span class="line"></span><br><span class="line">    def do_POST(self):</span><br><span class="line">        &quot;&quot;&quot;Add a new todo</span><br><span class="line"></span><br><span class="line">        Only json data is supported, otherwise send a 415 response back.</span><br><span class="line">        Append new todo to class variable, and it will be displayed</span><br><span class="line">        in following get request</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        ctype, pdict &#x3D; cgi.parse_header(self.headers[&#39;content-type&#39;])</span><br><span class="line">        if ctype &#x3D;&#x3D; &#39;application&#x2F;json&#39;:</span><br><span class="line">            length &#x3D; int(self.headers[&#39;content-length&#39;])</span><br><span class="line">            post_values &#x3D; json.loads(self.rfile.read(length))</span><br><span class="line">            self.TODOS.append(post_values)</span><br><span class="line">        else:</span><br><span class="line">            self.send_error(415, &quot;Only json data is supported.&quot;)</span><br><span class="line">            return</span><br><span class="line"></span><br><span class="line">        self.send_response(200)</span><br><span class="line">        self.send_header(&#39;Content-type&#39;, &#39;application&#x2F;json&#39;)</span><br><span class="line">        self.end_headers()</span><br><span class="line"></span><br><span class="line">        self.wfile.write(post_values)</span><br><span class="line"></span><br><span class="line">if __name__ &#x3D;&#x3D; &#39;__main__&#39;:</span><br><span class="line">    # Start a simple server, and loop forever</span><br><span class="line">    from BaseHTTPServer import HTTPServer</span><br><span class="line">    server &#x3D; HTTPServer((&#39;localhost&#39;, 8888), TodoHandler)</span><br><span class="line">    print(&quot;Starting server, use &lt;Ctrl-C&gt; to stop&quot;)</span><br><span class="line">    server.serve_forever()</span><br></pre></td></tr></table></figure>
+<p>所以可以把一些后续操作，移动到另一台服务器上来。</p>
+<h5 id="动态DNS（DDNS）来解决动态IP"><a href="#动态DNS（DDNS）来解决动态IP" class="headerlink" title="动态DNS（DDNS）来解决动态IP"></a>动态DNS（DDNS）来解决动态IP</h5><p>搭建外部访问公司的vpn通道是使用的pptp协议，因为我们的IP是动态IP，经常更换，所以一个比较好的解决办法是，把ip都解析到同一个域名下。这就引出了DDNS的概念。Unifi路由器配置的方法参见这个教程<a href="https://help.ubnt.com.cn/hc/zh-cn/articles/360000101941-UniFi-%E5%8A%A8%E6%80%81-DNS-%E9%85%8D%E7%BD%AE" target="_blank" rel="noopener">UniFi - 动态 DNS 配置</a><br>还有这个教程<a href="http://bbs.ubnt.com.cn/forum.php?mod=viewthread&tid=18166" target="_blank" rel="noopener">在usg里怎么填写动态DNS？</a>。其中<a href="http://freedns.afraid.org/" target="_blank" rel="noopener">freedns</a>是一个提供免费DDNS的网站，可以提供给你一个免费的域名来做DDNS的解析。在freedns注册登陆后，并选择好域名后，进入Dynamic DNS页面移动到底，会看到你的域名和ip地址。如果我想更改ip，可以点击<code>quick</code><br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%8816.png" alt="freedns"><br>如果我想更改ip，可以点击<code>quick</code>,进入到另一页面，其中提供的方法就是用wget把ip推送给freedns网站，来达到更改ip的效果。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%A6%82%E4%BD%95%E8%A7%A3%E5%86%B3%E5%8A%A8%E6%80%81IP%E5%AF%BC%E8%87%B4%E7%9A%84VPN%E5%A4%B1%E6%95%8817.png" alt="命令行更改ip"></p>
+<p>所以每当检测到更换ip后，我们通过代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">os.system(&#39;wget -O http:&#x2F;&#x2F;freedns的地址&#39;)</span><br></pre></td></tr></table></figure>
+<p>来更换域名和ip的绑定关系。</p>
+<p>#####结尾<br>“有钱能使鬼推磨”，这是一句无比正确却毫无价值的一句话。直接多花些钱，当然可以升级成固定IP。但如果切换到上帝视角，就会发现，动态IP是很多企业和家庭所共同面临的一个问题。只是可能我平时上网需求，动态IP对我的上网没有任何影响。但如果当我们准备对网络搞些事情的时候，动态IP的问题就会铺面而来。所以我想如果不回避动态IP，而是想出一个解决办法，实际上是找出了一个对全行业都有价值的通用性解决方案。</p>
+<p>参考链接：<br><a href="https://time.geekbang.org/column/article/10386" target="_blank" rel="noopener">极客时间| VPN：朝中有人好做官</a><br><a href="https://www.v2ex.com/t/109521" target="_blank" rel="noopener">v2ex|用 vpn 连上公司内网后无法访问内网其他服务器</a><br><a href="https://www.alibabacloud.com/help/zh/doc-detail/53042.htm?spm=a2c63.p38356.b99.128.ac475703enNlTK" target="_blank" rel="noopener">阿里云VPN接口文档</a><br><a href="https://www.jianshu.com/p/7574349a5042" target="_blank" rel="noopener">阿里云 API 签名机制的 Python 实现</a><br><a href="https://blog.csdn.net/ybsun2010/article/details/9972403" target="_blank" rel="noopener">crontab 定时执行python脚本</a><br><a href="https://coolshell.cn/articles/1480.html" target="_blank" rel="noopener">非常简单的PYTHON HTTP服务</a><br><a href="http://cizixs.com/2016/05/20/python-httpserver" target="_blank" rel="noopener">Python BaseHTTPServer 介绍</a><br><a href="https://help.ubnt.com.cn/hc/zh-cn/articles/360000101941-UniFi-%E5%8A%A8%E6%80%81-DNS-%E9%85%8D%E7%BD%AE" target="_blank" rel="noopener">UniFi - 动态 DNS 配置</a><br><a href="http://bbs.ubnt.com.cn/forum.php?mod=viewthread&tid=18166" target="_blank" rel="noopener">在usg里怎么填写动态DNS？</a></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2019/02/17/5G夜狂奔/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2018/12/30/2018年漫画小结/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          <ul><li><a href="https://github.com/GallenHu/hexo-theme-Daily/wiki" target="_blank" rel="noopener">如何自定义这里的内容(配置教程)?</a></li></ul>
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Hexo &copy; 2020</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

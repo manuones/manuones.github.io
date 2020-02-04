@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="John Doe">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="Django用法"/>
+  
+  <!--Open Graph Description-->
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Hexo"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>Django用法 - Hexo</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="Hexo" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            Django用法
+            
+          </h1>
+          <p class="posted-on">
+          2017-06-19
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/后端/" rel="tag">
+                  后端
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <h4 id="基础用法"><a href="#基础用法" class="headerlink" title="基础用法"></a>基础用法</h4><p>首先是下载</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%951.png" alt=""></p>
+<p>建立工程文件，用过scarpy框架的对这个应该不会很陌生</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin.py startproject my_blog</span><br></pre></td></tr></table></figure>
+
+<p>为了方便查看我们用Django框架建立的my_blog文件，查看它的结构，所有用到tree来查看</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">brew install tree</span><br><span class="line"></span><br><span class="line">tree my_blog</span><br></pre></td></tr></table></figure>
+<p>效果如图：<br><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%952.png" alt=""></p>
+<p>然后创建一个app，这里的app是指的一个功能模块，比如这里建立的app名称为article，负责的功能就是文章。可以有很多功能模块。</p>
+<p>创建一个模块的命令是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py startapp article</span><br></pre></td></tr></table></figure>
+<p>注意是在我们已经创建的my_blog目录下进行创建，需要先切换进目录。新建了还不行，还要通知给主文件my_blog,告诉它“我在这呢！”，所有需要在my_blog/my_blog/setting.py下添加新建app，在INSTALLED_APPS中声明。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%953.png" alt=""><br>Django中默认用的数据库是sqlite，这里sqlite数据库里的需要同步一下，每次新添加app，需要同步数据库。命令是：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py migrate</span><br></pre></td></tr></table></figure>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%954.png" alt=""><br>然后就可以成功启动了。启动的命令为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver localhost:9000</span><br></pre></td></tr></table></figure>
+<p>可以打开浏览器查看</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%955.png" alt=""></p>
+<p>接下来就是创建Models的了，Models在我的项目是干什么的，Models在我的项目里是用来决定我的项目中有什么的。Models在article目录下，决定的是这个article中的内容。</p>
+<p>在article/models.py编写程序<br><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%956.png" alt=""></p>
+<p>可以看到代码里有title，有category，有date_time和content等，这些有什么用，我们先看下博客的成品。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%957.png" alt=""></p>
+<p>这里的article就是title，time就是date_time,models中定义的content，点击文章就会进入详情页，里面就会有文章内容。面所有创建models中的内容的时候，就是创建这些页面中有什么的过程。</p>
+<p>从成品来看，文章不止有一篇，而我们models如其名字，定义的是一个模板，但是文章有好几篇，这就有些类似淘宝了，文章就像是每个商品，需要商家来进行上架，我们的上架需要一个后台来进行上架操作，这就是一个后台管理界面，这个后台管理界面在Django中非常方便添加，我们创建项目时已经是默认有了，不信的话，可以去setting中的INSTALLED_APPS查看：</p>
+<p>我们可以在浏览器中进入localhost:9000/admin，呈现的是一个登陆页面，账号哪里来呢？</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%958.png" alt=""><br>需要我们自己创建：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py createsuperuser</span><br></pre></td></tr></table></figure>
+<p>输入邮箱和密码，不要以为是test项目就以为可以随便，密码设置这里也是有严格的要求的。</p>
+<p>用账号密码登录，这时候进入后，是这样的管理界面</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%959.png" alt=""><br>而我想要的是</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%9510.png" alt=""></p>
+<p>我需要把我创建的Article这个app引入进来。如何引入？进入article/admin.py这个文件进行修改，其实从这个文件的名称来看，admin不就是我们管理的主页面的名称，这里的admin不是随便起的名字，每个app的admin文件都和主文件的admin有联系。</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%9511.png" alt=""></p>
+<p>第一行与链接数据库有关；第二行和在article中导入models有关；第三行用于在主admin中注册Article。</p>
+<p>接下来就是很重点的，处理客户端的访问了，访问某个页面，然后我们返回什么数据。也就是函数定义页面。函数处理的文件为article/views.py，这这里编写逻辑。</p>
+<p>如喜闻乐见的Hello World</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%9512.png" alt=""><br>但是有一点需要说明的是，我们访问localhost：9000，得到的结果是<br><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%9513.png" alt=""></p>
+<p>但是如果访问localhost:9000/ahdifj就会找不到页面，说明有一个地方是负责分配流量的，也就是指定页面的，不同的页面有不同的view文件来定义相应的页面。</p>
+<p>这个分流的地方就是my_blog/urls.py</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%9514.png" alt=""><br>这里用正则表达式进行了匹配，来进行过滤，访问的是/的指定到views去，如果是/admin的就指定到admin的页面。</p>
+<p>入门的先写到这，总结一下今天遇到的坑：</p>
+<p>不要在一个terminal中进行所有操作，关闭Django，然后在重启，这样容易发生端口已经被占用，我们不用关闭，另外打开一个页面进行vim编辑就好了，编辑完了用：w保存一下，然后会自动进行编译。</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%9515.png" alt=""></p>
+<p>查看端口占用情况的命令：lsof -i:端口号</p>
+<p>killall+进程名</p>
+<p>在admin登录报错的话，可能是没有同步数据库.</p>
+<p>之前在article中添加的文章，下面这一步相当于查询sqlite数据库的操作。</p>
+<p>不要忘记这里和datetime的import。<br><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%9516.png" alt=""></p>
+<h4 id="利用Django简易的实现一个操作数据库后台"><a href="#利用Django简易的实现一个操作数据库后台" class="headerlink" title="利用Django简易的实现一个操作数据库后台"></a>利用Django简易的实现一个操作数据库后台</h4><p>Django为各种数据库提供了非常好的支持，这里拿sqlite作为例子。</p>
+<p>1.在项目中新建app</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">django-admin.py startapp cis</span><br></pre></td></tr></table></figure>
+
+<p>2.在项目的settings文件中的INSTALLED_APPS中添加新建的app名称。</p>
+<p>3.在settings文件中添加databases配置。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">DATABASES &#x3D; &#123;</span><br><span class="line">    &#39;default&#39;: &#123;</span><br><span class="line">        &#39;ENGINE&#39;: &#39;django.db.backends.sqlite3&#39;,</span><br><span class="line">        &#39;NAME&#39;: os.path.join(BASE_DIR, &#39;db.sqlite3&#39;),</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>4.在models.py文件中建立数据库的表和字段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">import uuid</span><br><span class="line">from django.db import models</span><br><span class="line"></span><br><span class="line"># Create your models here.</span><br><span class="line"></span><br><span class="line">class CommonBase(models.Model):</span><br><span class="line">    STATUS_CHOICES &#x3D; (</span><br><span class="line">        (&#39;DEFAULT&#39;, &#39;DEFAULT&#39;),</span><br><span class="line">        (&#39;DELETED&#39;, &#39;DELETED&#39;),</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">    id &#x3D; models.UUIDField(primary_key&#x3D;True, default&#x3D;uuid.uuid4, editable&#x3D;False, db_index&#x3D;True)</span><br><span class="line">    created_at &#x3D; models.DateTimeField(auto_now_add&#x3D;True, db_index&#x3D;True)</span><br><span class="line">    updated_at &#x3D; models.DateTimeField(auto_now&#x3D;True, db_index&#x3D;True)</span><br><span class="line">    status &#x3D; models.CharField(max_length&#x3D;20, choices&#x3D;STATUS_CHOICES, default&#x3D;&#39;DEFAULT&#39;)</span><br><span class="line"></span><br><span class="line">    class Meta:</span><br><span class="line">        abstract &#x3D; True</span><br><span class="line">        ordering &#x3D; [&#39;-updated_at&#39;, &#39;-created_at&#39;]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class AppProfile(CommonBase):</span><br><span class="line">    name &#x3D; models.CharField(max_length&#x3D;150, db_index&#x3D;True)</span><br><span class="line">    repo_url &#x3D; models.URLField()</span><br></pre></td></tr></table></figure>
+<p>这里面可以学习的一点就是CommonBase，和AppProfile的继承的用法。<br>5.数据库初始化和创建管理员<br>目前使用默认Sqlite作为数据库，使用Django命令工具初始化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py makemigrations &amp;&amp; python manage.py migrate</span><br></pre></td></tr></table></figure>
+<p>创建超级管理员：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py createsuperuser</span><br></pre></td></tr></table></figure>
+<p>本地debug模式启动Silvanus:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py runserver &lt;port&gt;</span><br></pre></td></tr></table></figure>
+<p>6.启动Django进行查看。<br>其中的Appprofiles就是我们上面代码生成的表。</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%9517.png" alt=""><br>查看它的添加数据库条目的页面<br><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%9518.png" alt=""></p>
+<p>7.命令行查看sqlite数据。<br>启动sqlite数据库</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sqlite3 &#x2F;Users&#x2F;mac&#x2F;Desktop&#x2F;Soga&#x2F;db.sqlite3</span><br></pre></td></tr></table></figure>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%9519.png" alt="查看表"><br><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%9520.png" alt="查看字段名"><br>启动django的python命令行环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python manage.py shell</span><br></pre></td></tr></table></figure>
+<p>调试使用sqlite中的数据<br><img src="http://q3sg5j9d4.bkt.clouddn.com/Django%E7%94%A8%E6%B3%9521.png" alt=""></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2017/08/17/实验音乐颠僧-小河/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2017/05/17/玩玩Docker/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          <ul><li><a href="https://github.com/GallenHu/hexo-theme-Daily/wiki" target="_blank" rel="noopener">如何自定义这里的内容(配置教程)?</a></li></ul>
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Hexo &copy; 2020</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>

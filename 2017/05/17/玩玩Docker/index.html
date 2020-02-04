@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="John Doe">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="玩玩Docker"/>
+  
+  <!--Open Graph Description-->
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Hexo"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>玩玩Docker - Hexo</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="Hexo" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            玩玩Docker
+            
+          </h1>
+          <p class="posted-on">
+          2017-05-17
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/操作系统/" rel="tag">
+                  操作系统
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>偶然的一个机会，听说了Docker，由于没做过后端，一开始只是觉得听起来就很高格调，这要是拿来装装该有多好，尤其是听说，装一些centos和ubuntu镜像，不用下载很庞大的image，而且用docker运行起来，比用virtualbox运行起来快多了。<br><a href="https://wiki.jikexueyuan.com/project/docker/" target="_blank" rel="noopener">极客学院docker教程WIKI</a><br>于是参照上面的教程，就敲着玩，按着那个教程敲了一遍，但是不知道是我没做过后端的原因，还是docker教程对初学者不是那么友好，算了，还是算我没做过后端好了。总之，就是命令，比着葫芦画瓢，能明白些，但是对于docker的原理，和用来干什么，为什么那么多人追逐，并不是很了解。终于今天看了掘金上的，周楷文的一篇文章，周楷文在程序员界，是青年才俊，之前我知道他，是在大学的时候，通过他写ios开发教程认识的，当时对于iOS并不是很了解，周楷文，写的ios教程，将设计与开发融合成了一本书，而我当时只看了讲设计的部分。重新回来，周楷文的这篇docker教程让人一下就明白了docker是用来干什么的问题。不得不叹服，讲解时，类比思维的重要性。<br><a href="">周楷文docker第一课</a><br>我来写下我的理解，首先要理解的三个名词，docker、容器、镜像。<br>镜像是centos，ubuntu等，为了提供软件所运行的环境。<br>一个容器对应一个镜像，在一个镜像上，装一个软件，这一个整体，就叫一个容器，有了运行环境，有了软件，那一个容器是为了提供一个服务的。<br>docker可以有很多容器，有不同的容器，就提供不同的服务，同样，在一个docker中不同容器之间可以利用其他容器的结果。<br>还有一个概念，就是docker运行宿主机，就是我们平时在电脑上运行一个docker，docker是访问不了我们电脑上的文件的。但是我们电脑却可以访问docker中的文件。docker有自己的端口，我们的电脑也有自己的端口，我们可以把docker的端口和我们电脑上的端口绑定，如果别人用访问我们电脑的端口，就可以访问到我们的docker了。<br>还有就是文章的结尾处引用的这篇文章</p>
+<p><a href="http://dockone.io/article/783" target="_blank" rel="noopener">十张图带你深入了解docker容器与镜像</a></p>
+<p>首先贴张总结性的图</p>
+<p><a href="http://q3sg5j9d4.bkt.clouddn.com/玩玩Docker-1.png" target="_blank" rel="noopener"></a></p>
+<p>容器=镜像+读写层<br>一个容器运行时，内部是怎样一个过程呢？<br><a href="http://q3sg5j9d4.bkt.clouddn.com/玩玩Docker-2.png" target="_blank" rel="noopener"></a><br>top是列出正在运行的进程，一个容器运行一个进程，一个进程可以理解为一个软件。容器直接彼此隔离，这样就避免了运行环境的相互影响。容器可以运行多个进行，就像在ubuntu中装多个软件。<br><a href="http://q3sg5j9d4.bkt.clouddn.com/玩玩Docker-3.png" target="_blank" rel="noopener"></a><br>如图，我在内部，直接创建了个文件，你不用管我内部是怎样的了，不要打扰我，直接能给你那个结果就好了。当这个容器不用后，在我们的电脑上也能找到这个文件。这是只生成了一个txt文件，如果是生成一个需要特殊容器才能生成的文件呢？可以想下。<br><a href="http://q3sg5j9d4.bkt.clouddn.com/玩玩Docker-4.png" target="_blank" rel="noopener"></a></p>
+<p>docker start是为容器创建了一个隔离空间。<br><a href="http://q3sg5j9d4.bkt.clouddn.com/玩玩Docker-5.png" target="_blank" rel="noopener"></a></p>
+<p>docker commit命令将容器的可读写层转换为一个只读层，这样就把一个容器转换成了不可变的镜像。<br>万丈高山起于垒土，一层一层堆基础啊</p>
+<p><a href="http://q3sg5j9d4.bkt.clouddn.com/玩玩Docker-6.png" target="_blank" rel="noopener"></a></p>
+<p>这个命令是在容器中，开启一个新的进程。<br>还有一个就是docker save和docker export。docker save是保存镜像，docker export是保存容器。<br>当看完上面两篇文章，在回看极客学院上的教程，就更好明白了。在补充下。<br><a href="http://q3sg5j9d4.bkt.clouddn.com/玩玩Docker-7.png" target="_blank" rel="noopener"></a></p>
+<p>比较以上两个命令，第一个直接利用利用容器得到了结果，第二个是进入了容器，也就是我们平时理解的进入了虚拟机，只不过没有图形化界面罢了。<br>-t表示在新容器内指定一个伪终端或终端，-i表示允许我们对容器内的STDIN进行交互。<br>可以输入exit进行退出。但这样的结果，就是容器停止了，我们在手机上打开网易云音乐的时候退出，可能更多时候是想一边听歌，一边玩微信，让网易云音乐到后台去提供服务。这时候就需要类似<br><a href="http://q3sg5j9d4.bkt.clouddn.com/玩玩Docker-8.png" target="_blank" rel="noopener"></a></p>
+<p>-d是告诉容器，让其后台运行。<br>还有就是另一个重要的命令<br><a href="http://q3sg5j9d4.bkt.clouddn.com/玩玩Docker-9.png" target="_blank" rel="noopener"></a></p>
+<p>形象化一点，就是这个图<br><a href="http://q3sg5j9d4.bkt.clouddn.com/玩玩Docker-10.png" target="_blank" rel="noopener"></a></p>
+<p>这个命令是查看正在运行的容器，已关闭的容器查看，还要其他命令。还有许多命令，但掌握了原理，就在脑中有了形象，在去了解其他命令，就好理解了很多。<br><a href="http://q3sg5j9d4.bkt.clouddn.com/玩玩Docker-11.png" target="_blank" rel="noopener"></a></p>
+<h3 id="Docker基础命令"><a href="#Docker基础命令" class="headerlink" title="Docker基础命令"></a>Docker基础命令</h3><p>我们都知道，操作系统分为内核和用户空间。对于 Linux 而言，内核启动后，会挂载 root 文件系统为其提供用户空间支持。而 Docker 镜像（Image），就相当于是一个 root 文件系统。比如官方镜像 ubuntu:14.04 就包含了完整的一套 Ubuntu 14.04 最小系统的 root 文件系统。</p>
+<h5 id="Docker基础命令-1"><a href="#Docker基础命令-1" class="headerlink" title="Docker基础命令"></a>Docker基础命令</h5><p>查看Docker信息</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker info</span><br></pre></td></tr></table></figure>
+<p>下载镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker pull busybox</span><br></pre></td></tr></table></figure>
+<p>BusyBox是一个最小的Linux系统<br>运行一个带标签镜像的容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -t -i ubuntu:14.04 &#x2F;bin&#x2F;bash</span><br></pre></td></tr></table></figure>
+<p>跑个Hello World</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run busybox &#x2F;bin&#x2F;echo Hello World</span><br></pre></td></tr></table></figure>
+<p>构建容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sample_job&#x3D;$(docker run -d busybox &#x2F;bin&#x2F;sh -c &quot;while true;do echo Docker;sleep 1;done&quot;)</span><br></pre></td></tr></table></figure>
+<p>其中的<code>-d</code>是放在后台执行<br>查看日志</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker logs $sample_job</span><br></pre></td></tr></table></figure>
+
+<p>名为sample_job的容器，停止命令是</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker stop $sample_job</span><br></pre></td></tr></table></figure>
+<p>重启该容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker restart $sample_job</span><br></pre></td></tr></table></figure>
+<p>要将容器删除，需要先将容器停止，容器删除命令为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rm $sample_job</span><br></pre></td></tr></table></figure>
+<p>将容器的状态保存为新的镜像的方法为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker commit</span><br></pre></td></tr></table></figure>
+<p>查看镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker images</span><br></pre></td></tr></table></figure>
+<p>搜索镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker search (image-name)</span><br></pre></td></tr></table></figure>
+<p>查看镜像的历史版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker history (image-name)</span><br></pre></td></tr></table></figure>
+<p>将镜像推送到registry</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker push (image-name)</span><br></pre></td></tr></table></figure>
+<p>查看我们正在运行的容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps -l</span><br></pre></td></tr></table></figure>
+<p>端口映射</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 5000:5000 training&#x2F;webapp python app.py</span><br></pre></td></tr></table></figure>
+<p>移除镜像</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker rmi（镜像名称或者id前3位）</span><br></pre></td></tr></table></figure>
+
+<h5 id="小例子"><a href="#小例子" class="headerlink" title="小例子"></a>小例子</h5><p>命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 80:80 --name webserver nginx</span><br></pre></td></tr></table></figure>
+<p>这条命令会用 nginx 镜像启动一个容器，命名为 webserver，并且映射了 80 端口，这样我们可以用浏览器去访问这个 nginx 服务器。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/3072403-06f2e7a899a8508a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt=""></p>
+<p>现在，假设我们非常不喜欢这个欢迎页面，我们希望改成欢迎 Docker 的文字，我们可以使用 docker exec 命令进入容器，修改其内容。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ docker exec -it webserver bash</span><br><span class="line">root@3729b97e8226:&#x2F;# echo &#39;&lt;h1&gt;Hello, Docker!&lt;&#x2F;h1&gt;&#39; &gt; &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html&#x2F;index.html</span><br><span class="line">root@3729b97e8226:&#x2F;# exit</span><br><span class="line">exit</span><br></pre></td></tr></table></figure>
+<p>我们修改了容器的文件，也就是改动了容器的存储层。我们可以通过 docker diff 命令看到具体的改动。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker diff webserver</span><br></pre></td></tr></table></figure>
+<p>现在我们定制好了变化，我们希望能将其保存下来形成镜像。</p>
+<h5 id="Docker-commit"><a href="#Docker-commit" class="headerlink" title="Docker commit"></a>Docker commit</h5><p>要知道，当我们运行一个容器的时候（如果不使用卷的话），我们做的任何文件修改都会被记录于容器存储层里。而 Docker 提供了一个 docker commit 命令，可以将容器的存储层保存下来成为镜像。换句话说，就是在原有镜像的基础上，再叠加上容器的存储层，并构成新的镜像。以后我们运行这个新镜像的时候，就会拥有原有容器最后的文件变化。<br>我们可以用下面的命令将容器保存为镜像：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ docker commit \</span><br><span class="line">    --author &quot;Tao Wang &lt;twang2218@gmail.com&gt;&quot; \</span><br><span class="line">    --message &quot;修改了默认网页&quot; \</span><br><span class="line">    webserver \</span><br><span class="line">    nginx:v2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name web2 -d -p 81:80 nginx:v2</span><br></pre></td></tr></table></figure>
+<p>这里我们命名为新的服务为 web2，并且映射到 81 端口。</p>
+<p>慎用 docker commit</p>
+<p>首先，如果仔细观察之前的 docker diff webserver 的结果，你会发现除了真正想要修改的 /usr/share/nginx/html/index.html 文件外，由于命令的执行，还有很多文件被改动或添加了。这还仅仅是最简单的操作，如果是安装软件包、编译构建，那会有大量的无关内容被添加进来，如果不小心清理，将会导致镜像极为臃肿。</p>
+<p>此外，使用 docker commit 意味着所有对镜像的操作都是黑箱操作，生成的镜像也被称为黑箱镜像，换句话说，就是除了制作镜像的人知道执行过什么命令、怎么生成的镜像，别人根本无从得知。而且，即使是这个制作镜像的人，过一段时间后也无法记清具体在操作的。虽然 docker diff 或许可以告诉得到一些线索，但是远远不到可以确保生成一致镜像的地步。这种黑箱镜像的维护工作是非常痛苦的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker stop webserver</span><br><span class="line">docker rm webserver</span><br></pre></td></tr></table></figure>
+<h5 id="运行一个带标签镜像的容器"><a href="#运行一个带标签镜像的容器" class="headerlink" title="运行一个带标签镜像的容器"></a>运行一个带标签镜像的容器</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker run -t -i -rm ubuntu:14.04 &#x2F;bin&#x2F;bash</span><br></pre></td></tr></table></figure>
+<p><code>-it</code>：这是两个参数，一个是 -i：交互式操作，一个是 -t 终端。我们这里打算进入 bash 执行一些命令并查看返回结果，因此我们需要交互式终端。<br><code>-rm</code>：这个参数是说容器退出后随之将其删除。默认情况下，为了排障需求，退出的容器并不会立即删除，除非手动 docker rm。我们这里只是随便执行个命令，看看结果，不需要排障和保留结果，因此使用 –rm 可以避免浪费空间。<br><code>ubuntu:14.04</code>：这是指用 ubuntu:14.04 镜像为基础来启动容器。<br><code>bash</code>：放在镜像名后的是命令，这里我们希望有个交互式 Shell，因此用的是 bash。<br>要想列出已经下载下来的镜像，可以使用 docker images 命令。</p>
+<h5 id="Docker-images的过滤"><a href="#Docker-images的过滤" class="headerlink" title="Docker images的过滤"></a>Docker images的过滤</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker images ubuntu</span><br></pre></td></tr></table></figure>
+<p>镜像 ID 则是镜像的唯一标识，一个镜像可以对应多个标签。</p>
+<p>如果仔细观察，会注意到，这里标识的所占用空间和在 Docker Hub 上看到的镜像大小不同。比如，ubuntu:16.04<br> 镜像大小，在这里是 127 MB<br>，但是在 <a href="https://hub.docker.com/r/library/ubuntu/tags/" target="_blank" rel="noopener">Docker Hub</a> 显示的却是 50 MB<br>。这是因为 Docker Hub 中显示的体积是压缩后的体积。</p>
+<p>docker images 还支持强大的过滤器参数 –filter，或者简写 -f。我们希望看到在 mongo:3.2 之后建立的镜像，可以用下面的命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ docker images -f since&#x3D;mongo:3.2</span><br></pre></td></tr></table></figure>
+<p>想查看某个位置之前的镜像也可以，只需要把 since 换成 before 即可。<br>文章参考：<br><a href="https://yuedu.baidu.com/ebook/d817967416fc700abb68fca1" target="_blank" rel="noopener">Docker入门实战</a><br><a href="http://wiki.jikexueyuan.com/project/docker/userguide/dockerlinks.html" target="_blank" rel="noopener">极客学院</a><br><a href="https://yeasy.gitbooks.io/docker_practice/content/basic_concept/container.html" target="_blank" rel="noopener">Docker从入门到实践</a></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+        <div class="nav-previous">
+          <a href="/2017/06/19/Django用法/" rel="prev"><span class="meta-arraw meta-arraw-left"></span> Older Posts</a>
+        </div>
+      
+      
+        <div class="nav-next">
+          <a href="/2016/09/30/用Hexo在github搭建个人博客/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          <ul><li><a href="https://github.com/GallenHu/hexo-theme-Daily/wiki" target="_blank" rel="noopener">如何自定义这里的内容(配置教程)?</a></li></ul>
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Hexo &copy; 2020</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>
