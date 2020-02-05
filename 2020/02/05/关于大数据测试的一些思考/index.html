@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+  <!--Description-->
+  
+
+  <!--Author-->
+  
+  <meta name="author" content="John Doe">
+  
+
+  <!--Open Graph Title-->
+  
+      <meta property="og:title" content="关于大数据测试的一些思考"/>
+  
+  <!--Open Graph Description-->
+  
+  <!--Open Graph Site Name-->
+  <meta property="og:site_name" content="Hexo"/>
+  <!--Type page-->
+  
+      <meta property="og:type" content="article" />
+  
+  <!--Page Cover-->
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <!-- Title -->
+  
+  <title>关于大数据测试的一些思考 - Hexo</title>
+
+
+  <link rel="shortcut icon" href="https://hexo.io/icon/favicon-96x96.png">
+
+  <!-- Custom CSS/Sass -->
+  
+<link rel="stylesheet" href="/css/style.css">
+
+
+  <!----------------------------
+  https://github.com/GallenHu/hexo-theme-Daily
+
+ _____            _   _
+|  __ \          (_) | |
+| |  | |   __ _   _  | |  _   _
+| |  | |  / _` | | | | | | | | |
+| |__| | | (_| | | | | | | |_| |
+|_____/   \__,_| |_| |_|  \__, |
+                          __/ |
+                         |___/
+
+    --------------------------->
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+<body>
+
+  <!-- Nav -->
+  <header class="site-header">
+  <div class="header-inside">
+    <div class="logo">
+      <a href="/" rel="home">
+        
+        <img src="https://hexo.io/logo.svg" alt="Hexo" height="60">
+        
+      </a>
+    </div>
+    <!-- Navigation -->
+    <nav class="navbar">
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse">
+        <ul class="navbar-nav">
+          
+          
+            <li>
+              <a href="/.">
+                
+                  home
+                
+              </a>
+            </li>
+          
+            <li>
+              <a href="/archives">
+                
+                  archive
+                
+              </a>
+            </li>
+          
+        </ul>
+      </div>
+      <!-- /.navbar-collapse -->
+    </nav>
+    <div class="button-wrap">
+      <button class="menu-toggle">Primary Menu</button>
+    </div>
+  </div>
+</header>
+
+
+  <!-- Main Content -->
+  <div class="content-area">
+  <div class="post">
+    <!-- Post Content -->
+    <div class="container">
+      <article>
+        <!-- Title date & tags -->
+        <div class="post-header">
+          <h1 class="entry-title">
+            关于大数据测试的一些思考
+            
+          </h1>
+          <p class="posted-on">
+          2020-02-05
+          </p>
+          <div class="tags-links">
+            
+              
+                <a href="/tags/测试/" rel="tag">
+                  测试
+                </a>
+              
+            
+          </div>
+        </div>
+        <!-- Post Main Content -->
+        <div class="entry-content has_line_number">
+          <p>大数据应用的测试流程</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%85%B3%E4%BA%8E%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83-1.png" alt=""><br>测试用例的编写</p>
+<p>功能测试编写测试用例的常用方法：等价类、边界值（这两个方法估计做测试的都知道），同样适用于大数据测试编写用例，与通常意义上的功能测试不同的是，他的输入不再是一个输入框，而是一个数据库字段或者一个有特殊意义的数据集（包含多个数据）。</p>
+<p>大数据测试与以往测试有哪些不同？</p>
+<p>难点：</p>
+<p>1) 测试环境或测试数据的准备。大数据测试难点之一就是涉及到测试数据的准备，因为如果真正做到一个好的测试质量，测试数据的数量、复杂度等方面都要尽量贴近于真实场景。大数据测试涉及数据量大，数据又复杂，所以构造测试数据是难点。一般来说通过现网引流、业务场景进行造数测试；现网数据引流一般来说数据真实、复杂度较好，优先考虑；入股现网引流无法考虑，就采用构造数据方法，构造测试数据对测试人员相关技能有所要求，例如：python或java，SQL、Linux Shell、docker等快速准备测试环境和测试数据应用到的技术和工具。</p>
+<p>2) 数据质量也是大数据测试的一个重要内容。在测试应用程序之前，有必要检查数据的质量，并应将其视为数据库测试的一部分。它涉及检查各种特征，如一致性，准确性、有效性，数据完整性等。要验证数据在处理过程各节点业务逻辑的正确性和数据的正确性，最后也要保证生成输出数据文件，并准备根据需要将其移至企业数据仓库或任何其他系统。</p>
+<p>为了对数据质量进行保证，需要依据测试的理论对数据进行等价划分。<br>如文章中的例子。</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%85%B3%E4%BA%8E%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83-2.png" alt=""><br>测试数据不仅要保证数量，而且更要保证<code>用例覆盖的全面性</code>，如果你准备了几千条数据，但是数据类型都一样，覆盖的代码分支也都是一条，那这些数据只有一条能称之为有效测试数据，其他的全部是无效测试数据。单纯的测试数据，或者单纯的测试输入，没什么意义，我们必须结合不同的场景，设计更全面、更有效率的测试用例。</p>
+<p>一、数据测试</p>
+<p>所以我们总结出的第一个突破口就是数据测试。保证我们用来建模的数据是正确的。在这里的数据测试会跟我们以往的测试有些不一样。</p>
+<p>1、首先是数据规模的增长。数据大了里面的有些数据可能会发生一些很诡异的事情。<br>2、然后是存储介质和技术栈的变化，我们用来训练模型的数据都会存放在hadoop集群上，所以一般都会用spark或者Hbase来编写测试脚本。<br>3、最后是验证方式的变化，之前我们测试的时候都是精确的测试每条数据的正确性。 但是现在我们需要根据业务设定每一个字段的规则。然后扫描每一行数据，如果这条数据超出了这个字段的规定范围，会发出报警。 假如用户年龄这个字段，正常值可能是0~100岁。如果突然出现个300岁，那么这条数据肯定是有问题的。我们之前曾经碰见过这样的数据。本来这条数据应该是30岁的，但不知道抽了什么风多了个0.</p>
+<p>二、自动化与测试工具的建设</p>
+<p>从测试工具的效率上看，<code>数据测试天生就是有自动化属性</code>的，因为测试人员不可能肉眼一条条对数据进行 check。所以对数据测试工具的效率讨论，<code>理论上不集中在是否要自动化，而是在对数据测试方法流程的改进上</code>。数据测试方法流程包括测试case的编写和积累、测试 case 的无监督执行、测试结果的自动分析。将整个的数据测试工作通过一套工具进行串联，同时也将已有的 case 进行快速复用，对数据测试效率的提高是很有帮助的。</p>
+<p>所以总结下数据测试工具的需求有这么几个：</p>
+<p>需求一：支持输入<code>数据的构造</code>、支持 CR。<br>需求二：支持输出数据的<code>功能性测试</code>。<br>需求三：支持对其他测试方法的低耦合式接入。<br>需求四：支持测试执行时机的灵活选择。<br>需求五：支持测试case的快速编写和<code>重复利用</code>。<br>需求六：支持对测试过程的<code>串联</code>。</p>
+<p>三、关于数据仓库的测试：</p>
+<p>一、方法及原则<br>数据测试环节测试角色（角色承担者可以是测试人员，也可以是开发）重点要做到的事项：</p>
+<p>1、代码规范性测试，命名规范、编码类型、是否支持重跑等；<br>2、数据规范性测试，命名规范、表结构规范、精度要求、空值处理方式、时间类型格式等；<br>3、数据基础性测试，主键唯一、重复记录、空值或无效值占比等；<br>4、业务正确性测试，各业务点是否被正确实现，可通过划分边界值、等价类等样本数据进行验证；<br>5、代码性能测试，验证代码是否符合业务基线时间的要求；</p>
+<p>二、数据测试用例设计</p>
+<p><img src="http://q3sg5j9d4.bkt.clouddn.com/%E5%85%B3%E4%BA%8E%E5%A4%A7%E6%95%B0%E6%8D%AE%E6%B5%8B%E8%AF%95%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%80%83-3.png" alt=""></p>
+<p>三、与工具结合(待定)<br>1、检查编码规范需要落地到扫描工具；<br>2、数据探查工具需要有探查的工具支撑；<br>3、数据测试初始化的验证工具支撑；<br>4、自动化抽样数据的验证功能<br>5、自动化回归测试功能<br>6、UDF函数自动化测试机制<br>7、自动化数据比对的功能</p>
+<p>四、测试的交付物<br>1、测试分析方案报告<br>2、交付测试报告<br>3、质量评估报告模板<br>4、验收测试报告模板</p>
+<h4 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h4><p><a href="https://testerhome.com/topics/9362" target="_blank" rel="noopener">MTSC-2017 演讲稿–人工智能产品的测试探索</a><br><a href="https://testerhome.com/topics/17092" target="_blank" rel="noopener">测试开发之路–Spark 之旅 (四)：大数据产品的一种测试方法与实现</a><br><a href="https://zhuanlan.zhihu.com/p/75794405" target="_blank" rel="noopener">“做好大数据测试，我是认真的！”</a><br><a href="https://zhuanlan.zhihu.com/p/80461863" target="_blank" rel="noopener">更好的完成大数据测试的方法</a></p>
+<p><a href="https://help.aliyun.com/document_detail/116014.html?spm=a2c4g.11186623.4.6.30e3631a5RKHZh" target="_blank" rel="noopener">数据仓库研发规范-阿里巴巴</a></p>
+
+        </div>
+      </article>
+    </div>
+    <!-- Comments -->
+    <div class="container">
+      
+<section id="comment">
+  <!-- <h1 class="title">Comments</h1> -->
+
+  
+</section>
+
+
+    </div>
+    <!-- Pre or Next -->
+    <div class="nav-links">
+      
+      
+        <div class="nav-next">
+          <a href="/2020/01/04/JMeter源码分析之JMeter总体架构/" rel="prev">Newer Posts <span class="meta-arraw meta-arraw-right"></span></a>
+        </div>
+      
+    </div>
+
+  </div>
+</div>
+
+
+  <!-- Footer -->
+  <!-- Footer-widgets -->
+<div class="footer-widgets">
+  <div class="row inside-wrapper">
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">关于本站</h1>
+        <div class="custom-widget-content">
+          
+          <ul><li><a href="https://github.com/GallenHu/hexo-theme-Daily/wiki" target="_blank" rel="noopener">如何自定义这里的内容(配置教程)?</a></li></ul>
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Contact</h1>
+        <div class="widget-text">
+          
+            
+              <a href="https://github.com/GallenHu" class="icon icon-github" target="_blank">github</a>
+            
+          
+        </div>
+      </aside>
+    </div>
+    <div class="col-1-3">
+      <aside>
+        <h1 class="widget-title">Search</h1>
+        <div class="widget-text">
+          <form onSubmit="return appDaily.submitSearch('')">
+            <p>
+              <input type="text" placeholder="search..." id="homeSearchInput">
+            </p>
+            <!-- <input type="submit" value="GO"> -->
+          </form>
+        </div>
+      </aside>
+    </div>
+  </div>
+</div>
+<!-- Footer -->
+<footer class="site-info">
+  <p>
+    <span>Hexo &copy; 2020</span>
+    
+      <span class="split">|</span>
+      <span>Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> with Theme <a href="https://github.com/GallenHu/hexo-theme-Daily" target="_blank">Daily</a></span>
+    
+  </p>
+</footer>
+
+
+  <!-- After footer scripts -->
+  <!-- scripts -->
+
+<script src="/js/app.js"></script>
+
+
+
+
+
+
+</body>
+
+</html>
